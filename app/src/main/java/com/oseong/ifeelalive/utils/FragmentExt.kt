@@ -1,4 +1,4 @@
-package com.oseong.ifeelalive.ui.utils
+package com.oseong.ifeelalive.utils
 
 import androidx.fragment.app.Fragment
 

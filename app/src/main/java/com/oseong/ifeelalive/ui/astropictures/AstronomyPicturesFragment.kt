@@ -1,4 +1,4 @@
-package com.oseong.ifeelalive.ui.pictures
+package com.oseong.ifeelalive.ui.astropictures
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,11 +9,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.oseong.ifeelalive.R
 import com.oseong.ifeelalive.databinding.FragmentAstronomyPicturesBinding
-import com.oseong.ifeelalive.ui.picture.AstronomyPictureFragment
 
 class AstronomyPicturesFragment : Fragment() {
 
-    var _binding: FragmentAstronomyPicturesBinding? = null
+    private var _binding: FragmentAstronomyPicturesBinding? = null
     private val binding get() = _binding!!
 
     private fun showActionbar(string: String) {
@@ -38,26 +37,11 @@ class AstronomyPicturesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.ivPicture.setOnClickListener {
-            showAstronomyPictureFragment()
-
-        }
     }
 
     override fun onResume() {
         super.onResume()
         showActionbar(resources.getString(R.string.astronomy_pictures))
-    }
-
-    private fun showAstronomyPictureFragment() {
-        with(parentFragmentManager) {
-            findFragmentByTag(AstronomyPictureFragment.FRAGMENT_TAG) as AstronomyPictureFragment?
-                ?: beginTransaction().replace(
-                    R.id.fragment_container,
-                    AstronomyPictureFragment(),
-                    AstronomyPictureFragment.FRAGMENT_TAG
-                ).addToBackStack(null).commit()
-        }
     }
 
     override fun onDestroyView() {

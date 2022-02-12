@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">IFeelAlive</string>
-    <string name="astronomy_pictures" translatable="false">AstronomyPictures</string>
+    <string name="astronomy_pictures">AstronomyPictures</string>
+    <string name="astro_pictures">ASTRO PICTURES</string>
+    <string name="favorite_astro_pictures">FAVORITE PICTURES</string>
 </resources>

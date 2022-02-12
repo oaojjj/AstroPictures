@@ -2,26 +2,13 @@ package com.oseong.ifeelalive.ui.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.databinding.DataBindingUtil
 import com.oseong.ifeelalive.R
-import com.oseong.ifeelalive.ui.pictures.AstronomyPicturesFragment
+import com.oseong.ifeelalive.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-
-        setSupportActionBar(findViewById(R.id.toolbar))
-        showAstronomyPicturesFragment()
-    }
-
-    private fun showAstronomyPicturesFragment() {
-        with(supportFragmentManager) {
-            findFragmentByTag(AstronomyPicturesFragment.FRAGMENT_TAG) as AstronomyPicturesFragment?
-                ?: beginTransaction().add(
-                    R.id.fragment_container,
-                    AstronomyPicturesFragment(),
-                    AstronomyPicturesFragment.FRAGMENT_TAG
-                ).commit()
-        }
+        DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
     }
 }
