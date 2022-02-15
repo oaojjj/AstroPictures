@@ -4,6 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.oseong.ifeelalive.ui.astropictures.AstronomyPicturesFragment
 import com.oseong.ifeelalive.ui.favoritepictures.FavoritePicturesFragment
+import timber.log.Timber
 import java.lang.IndexOutOfBoundsException
 
 const val ASTRO_PICTURES_INDEX = 0
@@ -18,6 +19,8 @@ class AstroPicturesPagerAdapter(fragment: Fragment) : FragmentStateAdapter(fragm
 
     override fun getItemCount(): Int = tabFragmentCreators.size
 
-    override fun createFragment(position: Int): Fragment =
-        tabFragmentCreators[position]?.invoke() ?: throw IndexOutOfBoundsException()
+    override fun createFragment(position: Int): Fragment {
+        return tabFragmentCreators[position]?.invoke() ?: throw IndexOutOfBoundsException()
+    }
+
 }

@@ -2,6 +2,7 @@ plugins {
     id 'com.android.application'
     id 'kotlin-android'
     id 'kotlin-kapt'
+    id 'dagger.hilt.android.plugin'
 }
 
 android {
@@ -15,6 +16,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "ULR_BASE", '"url.base"'
+        buildConfigField "String", "API_KEY", '"api.key"'
     }
 
     buildTypes {
@@ -50,6 +54,7 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
+    // databinding
     kapt "com.android.databinding:compiler:3.1.4"
 
     // palette
@@ -58,5 +63,27 @@ dependencies {
     // navigation
     implementation "androidx.navigation:navigation-fragment-ktx:2.4.1"
     implementation "androidx.navigation:navigation-ui-ktx:2.4.1"
+
+    // timber
+    implementation 'com.jakewharton.timber:timber:5.0.1'
+
+    // retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
+    // okhttp
+    // define a BOM and its version
+    implementation platform("com.squareup.okhttp3:okhttp-bom:4.9.3")
+
+    // define any required OkHttp artifacts without version
+    implementation "com.squareup.okhttp3:okhttp"
+    implementation "com.squareup.okhttp3:logging-interceptor"
+
+    // gson
+    implementation 'com.google.code.gson:gson:2.8.9'
+
+    // hilt - di
+    implementation "com.google.dagger:hilt-android:2.40.5"
+    kapt "com.google.dagger:hilt-android-compiler:2.38.1"
 
 }
