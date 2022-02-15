@@ -24,9 +24,6 @@ class AstronomyPicturesFragment : Fragment() {
     private var _binding: FragmentAstronomyPicturesBinding? = null
     private val binding get() = _binding!!
 
-    @Inject
-    lateinit var retrofit: Retrofit
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,18 +36,7 @@ class AstronomyPicturesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        retrofit.create(NasaService::class.java).getRandomAstroPictures().enqueue(object :
-            Callback<List<AstroPicture>> {
-            override fun onResponse(
-                call: Call<List<AstroPicture>>,
-                response: Response<List<AstroPicture>>
-            ) {
-                Timber.d(response.body().toString())
-            }
 
-            override fun onFailure(call: Call<List<AstroPicture>>, t: Throwable) {
-            }
-        })
     }
 
     override fun onDestroyView() {

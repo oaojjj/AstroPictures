@@ -10,7 +10,13 @@ import com.oseong.ifeelalive.data.AstroPicture
 class AstroPicturesAdapter :
     ListAdapter<AstroPicture, RecyclerView.ViewHolder>(AstroPictureDiffCallback) {
 
-    class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    // today astronomy picture
+    inner class HeaderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+    }
+
+    // astronomy pictures except today
+    inner class BodyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
     }
 
