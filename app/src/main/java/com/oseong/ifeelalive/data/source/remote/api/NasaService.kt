@@ -1,6 +1,6 @@
-package com.oseong.ifeelalive.data.source.api
+package com.oseong.ifeelalive.data.source.remote.api
 
-import com.oseong.ifeelalive.data.AstroPictureResponse
+import com.oseong.ifeelalive.data.AstroPicture
 import com.oseong.ifeelalive.utils.Utils
 import retrofit2.Call
 import retrofit2.http.GET
@@ -23,5 +23,5 @@ interface NasaService {
     fun getRandomAstroPictures(
         @Query("count") count: Int = 1,
         @Query("thumbs") thumbs: Boolean = true
-    ): Call<List<AstroPictureResponse>>
+    ): Call<List<AstroPicture>>
 }
