@@ -5,6 +5,9 @@ plugins {
     id 'dagger.hilt.android.plugin'
 }
 
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     compileSdk 31
 
@@ -17,8 +20,10 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField "String", "ULR_BASE", '"url.base"'
-        buildConfigField "String", "API_KEY", '"api.key"'
+
+
+        buildConfigField "String", "URL_BASE", properties['url.base']
+        buildConfigField "String", "API_KEY", properties['api.key']
     }
 
     buildTypes {
@@ -85,5 +90,9 @@ dependencies {
     // hilt - di
     implementation "com.google.dagger:hilt-android:2.40.5"
     kapt "com.google.dagger:hilt-android-compiler:2.38.1"
+
+    // coroutine
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
 
 }

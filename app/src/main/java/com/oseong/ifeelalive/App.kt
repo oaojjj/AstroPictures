@@ -3,6 +3,8 @@ package com.oseong.ifeelalive
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.util.*
 
 @HiltAndroidApp
 class App : Application() {
