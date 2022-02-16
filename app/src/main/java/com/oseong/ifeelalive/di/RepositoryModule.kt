@@ -16,12 +16,8 @@ object RepositoryModule {
     @Singleton
     @Provides
     fun providePicturesRepository(
-        @AppModule.LocalPicturesDataSource localPicturesDataSource: PicturesDataSource,
-        @AppModule.RemotePicturesDataSource remotePicturesDataSource: PicturesDataSource,
-        ioDispatcher: CoroutineDispatcher
+        @AppModule.RemotePicturesDataSource picturesRemoteDataSource: PicturesDataSource
     ): PicturesDataSource {
-        return PicturesRepository(
-            localPicturesDataSource, remotePicturesDataSource, ioDispatcher
-        )
+        return PicturesRepository(picturesRemoteDataSource)
     }
 }

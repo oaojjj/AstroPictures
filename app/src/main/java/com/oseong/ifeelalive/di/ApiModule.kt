@@ -25,12 +25,12 @@ object ApiModule {
         val apiInterceptor = Interceptor {
             val originRequest = it.request()
 
-            val addApiUrl = originRequest.url.newBuilder()
+            val addApiAndSortUrl = originRequest.url.newBuilder()
                 .addQueryParameter("api_key", BuildConfig.API_KEY)
                 .build()
 
             val newRequest = originRequest.newBuilder()
-                .url(addApiUrl)
+                .url(addApiAndSortUrl)
                 .build()
 
             it.proceed(newRequest)

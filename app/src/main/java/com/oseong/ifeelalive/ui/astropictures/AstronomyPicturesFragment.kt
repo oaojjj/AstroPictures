@@ -6,23 +6,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.oseong.ifeelalive.R
-import com.oseong.ifeelalive.data.AstroPicture
-import com.oseong.ifeelalive.data.source.remote.api.NasaService
 import com.oseong.ifeelalive.databinding.FragmentAstronomyPicturesBinding
+import com.oseong.ifeelalive.ui.astropictures.adapter.AstroPicturesAdapter
+import com.oseong.ifeelalive.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import timber.log.Timber
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class AstronomyPicturesFragment : Fragment() {
 
     private var _binding: FragmentAstronomyPicturesBinding? = null
     private val binding get() = _binding!!
+
+    private val vm: AstroPicturesViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,12 +29,24 @@ class AstronomyPicturesFragment : Fragment() {
         _binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_astronomy_pictures, container, false
         )
-        return binding.root
+
+        val adapter = AstroPicturesAdapter()
+        return with(binding) {
+            this.viewModel = vm
+            lifecycleOwner = this@AstronomyPicturesFragment
+            rvAstroPictures.adapter = adapter
+            rvAstroPictures.layoutManager = LinearLayoutManager(activity)
+            root
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // 날짜 선택 기능 추가 생각해보기.
+        val endDate: Long = System.currentTimeMillis()
+        val startDate: Long = Utils.getMillsFromMinusWeek(endDate, Utils.ONE_WEEK_TO_MILLS)
+        vm.getAstroPictures(startDate, endDate)
     }
 
     override fun onDestroyView() {

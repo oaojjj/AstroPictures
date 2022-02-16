@@ -11,8 +11,8 @@ interface AstroPictureDao {
     fun getAllFavoritePictures(): LiveData<List<AstroPicture>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFavoritePicture(astroPicture: AstroPicture)
+    fun insertFavoritePicture(astroPicture: AstroPicture)
 
     @Delete
-    suspend fun deleteFavoritePicture(astroPicture: AstroPicture)
+    fun deleteFavoritePicture(astroPicture: AstroPicture)
 }

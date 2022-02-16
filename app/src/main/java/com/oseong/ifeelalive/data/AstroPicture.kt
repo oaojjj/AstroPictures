@@ -3,18 +3,37 @@ package com.oseong.ifeelalive.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
+import com.oseong.ifeelalive.utils.Utils
 
+// GsonConverter 문제인지 모르겠는데, non-null type인데 null로 초기화되버리는 이슈가 있음..
 @Entity(tableName = "astro_pic_table")
 data class AstroPicture(
     @PrimaryKey(autoGenerate = true) val id: Long?,
-    val copyright: String,
+    val copyright: String?,
     val date: String,
     val explanation: String,
     @SerializedName("hdurl")
-    val hdUrl: String,
+    val hdUrl: String?,
     val media_type: String,
     val service_version: String,
-    val thumbnail_url: String,
+    val thumbnail_url: String?,
     val title: String,
     val url: String
-)
+) {
+
+    fun getCopyrightAndDate(): String {
+        return "${copyright()} / $date"
+    }
+
+    fun getThumbnail(): String {
+        return thumbnail_url ?: url
+    }
+
+    fun isToday(): Boolean {
+        return date == Utils.dateToString(System.currentTimeMillis())
+    }
+
+    private fun copyright(): String {
+        return copyright ?: "UnKnown"
+    }
+}
