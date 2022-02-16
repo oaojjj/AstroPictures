@@ -1,7 +1,7 @@
 package com.oseong.ifeelalive.data.source.remote.api
 
 import com.oseong.ifeelalive.data.AstroPicture
-import com.oseong.ifeelalive.utils.Utils
+import org.threeten.bp.LocalDate
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -16,8 +16,9 @@ interface NasaService {
 
     @GET("planetary/apod")
     suspend fun getAstroPictureFromData(
-        @Query("date") date: String = Utils.dateToString(System.currentTimeMillis())
+        @Query("date") date: String = LocalDate.now().toString()
     )
+
 
     @GET("planetary/apod")
     suspend fun getRandomAstroPictures(

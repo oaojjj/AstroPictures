@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.oseong.ifeelalive.R
 import com.oseong.ifeelalive.databinding.FragmentAstronomyPicturesBinding
 import com.oseong.ifeelalive.ui.astropictures.adapter.AstroPicturesAdapter
-import com.oseong.ifeelalive.utils.Utils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,7 +29,7 @@ class AstronomyPicturesFragment : Fragment() {
             inflater, R.layout.fragment_astronomy_pictures, container, false
         )
 
-        val adapter = AstroPicturesAdapter()
+        val adapter = AstroPicturesAdapter(vm)
         return with(binding) {
             this.viewModel = vm
             lifecycleOwner = this@AstronomyPicturesFragment
@@ -42,11 +41,7 @@ class AstronomyPicturesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // 날짜 선택 기능 추가 생각해보기.
-        val endDate: Long = System.currentTimeMillis()
-        val startDate: Long = Utils.getMillsFromMinusWeek(endDate, Utils.ONE_WEEK_TO_MILLS)
-        vm.getAstroPictures(startDate, endDate)
+        vm.loadAstroPictures()
     }
 
     override fun onDestroyView() {

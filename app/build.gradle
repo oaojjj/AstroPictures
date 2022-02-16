@@ -108,8 +108,10 @@ dependencies {
     // liveData
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0-alpha02"
 
-
     implementation 'androidx.activity:activity-ktx:1.4.0'
     implementation 'androidx.fragment:fragment-ktx:1.4.1'
+
+    // ThreeTen Android Backport
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.3.0'
 
 }

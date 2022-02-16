@@ -3,7 +3,7 @@ package com.oseong.ifeelalive.data
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
-import com.oseong.ifeelalive.utils.Utils
+import org.threeten.bp.LocalDate
 
 // GsonConverter 문제인지 모르겠는데, non-null type인데 null로 초기화되버리는 이슈가 있음..
 @Entity(tableName = "astro_pic_table")
@@ -30,7 +30,7 @@ data class AstroPicture(
     }
 
     fun isToday(): Boolean {
-        return date == Utils.dateToString(System.currentTimeMillis())
+        return date == LocalDate.now().toString()
     }
 
     private fun copyright(): String {
