@@ -28,10 +28,8 @@ class AstroPicturesViewModel @Inject constructor(
     val items: LiveData<List<AstroPictureItem>> = _items.switchMap { handleAstroPictureItems(it) }
 
     private val _loading = MutableLiveData(true)
-    //val loading: LiveData<Boolean> = _loading
 
     private val _error = MutableLiveData(false)
-    //private val error: LiveData<Boolean> = _error
 
     val loading: LiveData<Boolean> = Transformations.map(_loading) {
         it.or(_error.value!!)
@@ -49,7 +47,6 @@ class AstroPicturesViewModel @Inject constructor(
             is Resource.Loading -> _loading.value = true
             is Resource.Error -> _error.value = true
         }
-        result.value = emptyList()
         return result
     }
 
@@ -57,8 +54,8 @@ class AstroPicturesViewModel @Inject constructor(
         val astroPictureItems = mutableListOf<AstroPictureItem>()
 
         if (!items.value.isNullOrEmpty()) {
-            astroPictureItems.removeLast()
             astroPictureItems.addAll(items.value!!)
+            astroPictureItems.removeLast()
         }
 
         data.forEach { picture ->
