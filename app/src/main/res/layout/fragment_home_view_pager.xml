@@ -26,6 +26,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll|snap"
+                app:statusBarScrim="@color/grey_900"
                 app:toolbarId="@id/toolbar">
 
                 <com.google.android.material.appbar.MaterialToolbar
@@ -54,7 +55,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:tabIconTint="@drawable/tab_icon_color_selector"
-                app:tabTextColor="@color/deep_purple_200" />
+                app:tabSelectedTextColor="@color/white"
+                app:tabTextColor="@color/grey_400" />
 
         </com.google.android.material.appbar.AppBarLayout>
 

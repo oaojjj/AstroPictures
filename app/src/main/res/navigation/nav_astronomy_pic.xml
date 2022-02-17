@@ -13,20 +13,27 @@
         <action
             android:id="@+id/action_view_pager_fragment_to_astronomyPicturesFragment"
             app:destination="@id/astronomyPicturesFragment" />
+        <action
+            android:id="@+id/navigate_to_detail_from_pager"
+            app:destination="@id/astronomyPictureFragment" />
+        <action
+            android:id="@+id/action_view_pager_fragment_to_favoritePicturesFragment"
+            app:destination="@id/favoritePicturesFragment" />
     </fragment>
     <fragment
         android:id="@+id/astronomyPicturesFragment"
         android:name="com.oseong.ifeelalive.ui.astropictures.AstronomyPicturesFragment"
         android:label="fragment_astronomy_pictures"
-        tools:layout="@layout/fragment_astronomy_pictures" >
-        <action
-            android:id="@+id/action_astronomyPicturesFragment_to_favoritePicturesFragment"
-            app:destination="@id/favoritePicturesFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_astronomy_pictures"/>
     <fragment
         android:id="@+id/favoritePicturesFragment"
         android:name="com.oseong.ifeelalive.ui.favoritepictures.FavoritePicturesFragment"
         android:label="fragment_favorite_pictures"
-        tools:layout="@layout/fragment_favorite_pictures" />
+        tools:layout="@layout/fragment_favorite_pictures"/>
+    <fragment
+        android:id="@+id/astronomyPictureFragment"
+        android:name="com.oseong.ifeelalive.ui.astropicturedetail.AstroPictureDetailFragment"
+        android:label="fragment_astronomy_picture"
+        tools:layout="@layout/fragment_astro_picture_detail" />
 
 </navigation>

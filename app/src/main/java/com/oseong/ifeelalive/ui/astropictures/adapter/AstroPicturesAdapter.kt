@@ -3,6 +3,10 @@ package com.oseong.ifeelalive.ui.astropictures.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -26,6 +30,7 @@ class AstroPicturesAdapter(private val vm: AstroPicturesViewModel) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AstroPicture) {
             binding.astroPicture = item
+            binding.executePendingBindings()
         }
     }
 
@@ -34,6 +39,7 @@ class AstroPicturesAdapter(private val vm: AstroPicturesViewModel) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AstroPicture) {
             binding.astroPicture = item
+            binding.executePendingBindings()
         }
     }
 
@@ -75,13 +81,26 @@ class AstroPicturesAdapter(private val vm: AstroPicturesViewModel) :
 
         holder.itemView.setOnClickListener {
             Timber.d("click$position")
+            item?.let {
+                navigateToDetail(it, holder.itemView)
+            }
         }
-        //vm.loadMoreAstroPictures()
+
 
         when (getItemViewType(position)) {
             ViewType.Header.ordinal -> (holder as HeaderViewHolder).bind(item!!)
             ViewType.Body.ordinal -> (holder as BodyViewHolder).bind(item!!)
         }
+    }
+
+    private fun navigateToDetail(item: AstroPicture, view: View) {
+        val imageView = view.findViewById<ImageView>(R.id.iv_thumbs)
+
+        val extras =
+            FragmentNavigatorExtras(imageView to imageView.transitionName)
+
+        view.findNavController()
+            .navigate(R.id.navigate_to_detail_from_pager, bundleOf("item" to item), null, extras)
     }
 
     override fun getItemViewType(position: Int): Int {

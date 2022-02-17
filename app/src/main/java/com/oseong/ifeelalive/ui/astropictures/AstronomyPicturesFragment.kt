@@ -12,6 +12,7 @@ import com.oseong.ifeelalive.R
 import com.oseong.ifeelalive.databinding.FragmentAstronomyPicturesBinding
 import com.oseong.ifeelalive.ui.astropictures.adapter.AstroPicturesAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 
 @AndroidEntryPoint
 class AstronomyPicturesFragment : Fragment() {
@@ -29,12 +30,17 @@ class AstronomyPicturesFragment : Fragment() {
             inflater, R.layout.fragment_astronomy_pictures, container, false
         )
 
-        val adapter = AstroPicturesAdapter(vm)
+        Timber.d("lifeCycle")
+
+        val astroAdapter = AstroPicturesAdapter(vm)
+
         return with(binding) {
             this.viewModel = vm
             lifecycleOwner = this@AstronomyPicturesFragment
-            rvAstroPictures.adapter = adapter
-            rvAstroPictures.layoutManager = LinearLayoutManager(activity)
+            rvAstroPictures.apply {
+                this.adapter = astroAdapter
+                layoutManager = LinearLayoutManager(activity)
+            }
             root
         }
     }
@@ -46,6 +52,7 @@ class AstronomyPicturesFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Timber.d("lifeCycle")
         _binding = null
     }
 

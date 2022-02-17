@@ -8,9 +8,11 @@ import com.oseong.ifeelalive.data.AstroPictureItem
 import com.oseong.ifeelalive.data.Resource
 import com.oseong.ifeelalive.data.source.PicturesRepository
 import com.oseong.ifeelalive.ui.astropictures.adapter.ViewType
+import com.oseong.ifeelalive.utils.minusTwoWeeks
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
@@ -31,9 +33,14 @@ class AstroPicturesViewModel @Inject constructor(
 
     private val _error = MutableLiveData(false)
 
+    private val _firstLoad = MutableLiveData(true)
+    val firstLoading = _firstLoad
+
+/*
     val loading: LiveData<Boolean> = Transformations.map(_loading) {
         it.or(_error.value!!)
     }
+*/
 
     private fun handleAstroPictureItems(resource: Resource<List<AstroPicture>>): LiveData<List<AstroPictureItem>> {
         val result = MutableLiveData<List<AstroPictureItem>>()
@@ -55,13 +62,14 @@ class AstroPicturesViewModel @Inject constructor(
 
         if (!items.value.isNullOrEmpty()) {
             astroPictureItems.addAll(items.value!!)
-            astroPictureItems.removeLast()
         }
 
         data.forEach { picture ->
             astroPictureItems.add(
-                if (picture.isToday()) AstroPictureItem(picture, ViewType.Header)
-                else AstroPictureItem(picture)
+                if (_firstLoad.value!!) {
+                    _firstLoad.value = false
+                    AstroPictureItem(picture, ViewType.Header)
+                } else AstroPictureItem(picture)
             )
         }
 
@@ -69,36 +77,40 @@ class AstroPicturesViewModel @Inject constructor(
         return astroPictureItems
     }
 
-
     // 날짜 선택 기능 추가 생각해보기.
-    // 최근
-    private val endDate: LocalDate = LocalDate.now()
+    private val today: LocalDate = LocalDate.now()
 
-    // 과거
-    private val startDate: LocalDate = endDate.minusWeeks(1)
+    private var pagingDate = today.minusTwoWeeks()
 
     fun loadAstroPictures(
-        sd: LocalDate = startDate,
-        ed: LocalDate = endDate
+        sd: LocalDate = pagingDate,
+        ed: LocalDate = today
     ) = viewModelScope.launch {
-        _items.value = Resource.Loading()
-        val response = picturesRepository.getAstroPictures(sd, ed)
-        if (response.isSuccessful) {
-            response.body()?.let { result ->
-                _items.value = Resource.Success(result.reversed())
+        if (_firstLoad.value == true) {
+            _items.value = Resource.Loading()
+            val response = picturesRepository.getAstroPictures(sd, ed)
+
+            if (response.isSuccessful) {
+                response.body()?.let { result ->
+                    _items.value = Resource.Success(result.reversed())
+                }
+            } else {
+                _items.value = Resource.Error(response.message())
             }
-        } else {
-            _items.value = Resource.Error(response.message())
+
+            calPagingDate(sd)
         }
     }
 
-    private var pagingDate = startDate.minusDays(1)
-
     fun loadMoreAstroPictures() {
         val newEndDate = pagingDate
-        val newStartDate = newEndDate.minusWeeks(1)
-        loadAstroPictures(newStartDate, newEndDate)
+        val newStartDate = newEndDate.minusTwoWeeks()
 
-        pagingDate = newStartDate.minusDays(1)
+        loadAstroPictures(newStartDate, newEndDate)
+        calPagingDate(newStartDate)
+    }
+
+    private fun calPagingDate(sd: LocalDate) {
+        pagingDate = sd.minusDays(1)
     }
 }

@@ -3,8 +3,8 @@
     <style name="Theme.IFeelAlive" parent="Theme.MaterialComponents.DayNight.NoActionBar">
 
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/deep_purple_700</item>
-        <item name="colorPrimaryVariant">@color/deep_purple_900</item>
+        <item name="colorPrimary">@color/grey_900</item>
+        <item name="colorPrimaryVariant">@color/grey_900</item>
         <item name="colorOnPrimary">@color/white</item>
 
         <!-- Secondary brand color. -->
@@ -13,9 +13,10 @@
         <item name="colorOnSecondary">@color/black</item>
 
         <!-- Customize your theme here. -->
-        <item name="android:colorBackground">@color/deep_purple_700</item>
+        <item name="android:windowBackground">@color/grey_900</item>
         <item name="titleTextColor">@color/white</item>
         <item name="android:statusBarColor">@color/black</item>
 
     </style>
+
 </resources>

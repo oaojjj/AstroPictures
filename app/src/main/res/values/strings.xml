@@ -3,4 +3,5 @@
     <string name="astronomy_pictures">AstronomyPictures</string>
     <string name="astro_pictures">ASTRO PICTURES</string>
     <string name="favorite_astro_pictures">FAVORITE PICTURES</string>
+    <string name="shared_picture" translatable="false">shared_picture</string>
 </resources>

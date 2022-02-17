@@ -4,6 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import org.threeten.bp.LocalDate
+import java.io.Serializable
 
 // GsonConverter 문제인지 모르겠는데, non-null type인데 null로 초기화되버리는 이슈가 있음..
 @Entity(tableName = "astro_pic_table")
@@ -18,22 +19,23 @@ data class AstroPicture(
     val service_version: String,
     val thumbnail_url: String?,
     val title: String,
-    val url: String
-) {
+    val url: String?
+) : Serializable {
 
     fun getCopyrightAndDate(): String {
         return "${copyright()} / $date"
     }
 
-    fun getThumbnail(): String {
+    fun getThumbnail(): String? {
         return thumbnail_url ?: url
     }
 
-    fun isToday(): Boolean {
-        return date == LocalDate.now().toString()
+    fun getImage(): String? {
+        return url ?: thumbnail_url ?: hdUrl
     }
 
     private fun copyright(): String {
         return copyright ?: "UnKnown"
     }
+
 }

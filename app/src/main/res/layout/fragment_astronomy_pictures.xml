@@ -19,20 +19,22 @@
             android:id="@+id/rv_astro_pictures"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:scrollbarThumbVertical="@color/white"
+            android:scrollbars="vertical"
             app:items="@{viewModel.items}" />
 
         <ProgressBar
-            android:id="@+id/paginationProgressBar"
             style="?attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@android:color/transparent"
-            android:indeterminateTint="@color/white"
+            android:indeterminateTint="@color/grey_400"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/rv_astro_pictures"
-            app:visible="@{viewModel.loading}" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:visible="@{viewModel.firstLoading}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
