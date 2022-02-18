@@ -53,7 +53,18 @@ class AstroPictureDetailFragment : Fragment() {
         return with(binding) {
             this.item = astroPicture
 
-
+            appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+                if (abs(verticalOffset) - appBarLayout.totalScrollRange == 0) {
+                    //  Collapsed
+                    toolbarTitle.setTextAppearance(R.style.collapsedTitleStyle)
+                    // style에서는 왜 설정이 안되는가?..
+                    toolbarTitle.maxLines = 1
+                } else {
+                    //Expanded
+                    toolbarTitle.setTextAppearance(R.style.expandedTitleStyle)
+                    toolbarTitle.maxLines = 2
+                }
+            })
 
             root
         }
@@ -62,9 +73,11 @@ class AstroPictureDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val transitionName = arguments?.getString("name")
-        Timber.d(transitionName)
-        ViewCompat.setTransitionName(binding.ivImage, transitionName)
+        val imageTransitionName = arguments?.getString("name")
+        val titleTransitionName = arguments?.getString("title")
+
+        ViewCompat.setTransitionName(binding.ivImage, imageTransitionName)
+        ViewCompat.setTransitionName(binding.toolbarTitle, titleTransitionName)
     }
 
     override fun onDestroyView() {

@@ -4,5 +4,4 @@
     <string name="astronomy_pictures" translatable="false">AstronomyPictures</string>
     <string name="astro_pictures">Astro Pictures</string>
     <string name="favorite_astro_pictures">Favorite Picture</string>
-    <string name="shared_picture">shared_picture</string>
 </resources>

@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.navigation.findNavController
@@ -30,9 +31,14 @@ class AstroPicturesAdapter(private val vm: AstroPicturesViewModel) :
     inner class HeaderViewHolder(private val binding: ItemHeaderPictureBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AstroPicture) {
-            val name = binding.root.context.getString(R.string.shared_picture).plus(layoutPosition)
+            with(binding.root.context) {
+                val ivName = getString(R.string.shared_picture).plus(layoutPosition)
+                val tvName = getString(R.string.shared_title).plus(layoutPosition)
 
-            ViewCompat.setTransitionName(binding.ivThumbs, name)
+                ViewCompat.setTransitionName(binding.ivThumbs, ivName)
+                ViewCompat.setTransitionName(binding.tvTitle, tvName)
+            }
+
             binding.astroPicture = item
             binding.executePendingBindings()
         }
@@ -42,9 +48,14 @@ class AstroPicturesAdapter(private val vm: AstroPicturesViewModel) :
     inner class BodyViewHolder(private val binding: ItemBodyPictureBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AstroPicture) {
-            val name = binding.root.context.getString(R.string.shared_picture).plus(layoutPosition)
+            with(binding.root.context) {
+                val ivName = getString(R.string.shared_picture).plus(layoutPosition)
+                val tvName = getString(R.string.shared_title).plus(layoutPosition)
 
-            ViewCompat.setTransitionName(binding.ivThumbs, name)
+                ViewCompat.setTransitionName(binding.ivThumbs, ivName)
+                ViewCompat.setTransitionName(binding.tvTitle, tvName)
+            }
+
             binding.astroPicture = item
             binding.executePendingBindings()
         }
@@ -101,15 +112,23 @@ class AstroPicturesAdapter(private val vm: AstroPicturesViewModel) :
 
     private fun navigateToDetail(item: AstroPicture, view: View) {
         val imageView = view.findViewById<ImageView>(R.id.iv_thumbs)
+        val titleView = view.findViewById<TextView>(R.id.tv_title)
 
         val extras =
-            FragmentNavigatorExtras(imageView to imageView.transitionName)
+            FragmentNavigatorExtras(
+                imageView to imageView.transitionName,
+                titleView to titleView.transitionName
+            )
 
         Timber.d(imageView.transitionName)
 
         view.findNavController().navigate(
             R.id.navigate_to_detail_from_pager,
-            bundleOf("item" to item, "name" to imageView.transitionName),
+            bundleOf(
+                "item" to item,
+                "name" to imageView.transitionName,
+                "title" to titleView.transitionName
+            ),
             null,
             extras
         )

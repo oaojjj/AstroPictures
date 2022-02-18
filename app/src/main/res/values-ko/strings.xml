@@ -4,5 +4,4 @@
     <string name="astronomy_pictures" translatable="false">천문학 사진들</string>
     <string name="astro_pictures">사진 목록</string>
     <string name="favorite_astro_pictures">좋아하는 사진</string>
-    <string name="shared_picture">shared_picture</string>
 </resources>

@@ -27,13 +27,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:fitsSystemWindows="true"
-                app:collapsedTitleTextAppearance="@style/collapsedTitleStyle"
                 app:contentScrim="?attr/colorPrimary"
-                app:expandedTitleTextAppearance="@style/expandedTitleStyle"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
-                app:maxLines="2"
-                app:statusBarScrim="@color/black"
-                app:title="@{item.title}">
+                app:statusBarScrim="@color/black">
 
                 <ImageView
                     android:id="@+id/iv_image"
@@ -62,7 +58,17 @@
                     android:id="@+id/picture_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin" />
+                    android:layout_gravity="bottom"
+                    app:layout_collapseMode="pin">
+
+                    <TextView
+                        android:id="@+id/toolbar_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:ellipsize="end"
+                        android:text="@{item.title}" />
+                </com.google.android.material.appbar.MaterialToolbar>
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
