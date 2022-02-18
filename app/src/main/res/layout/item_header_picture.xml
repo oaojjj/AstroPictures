@@ -7,6 +7,8 @@
         <variable
             name="astroPicture"
             type="com.oseong.ifeelalive.data.AstroPicture" />
+
+
     </data>
 
     <androidx.cardview.widget.CardView
@@ -33,6 +35,7 @@
                 app:imageFromUrl="@{astroPicture.thumbnail}" />
 
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="8dp"

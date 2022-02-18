@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.os.bundleOf
+import androidx.core.view.ViewCompat
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.recyclerview.widget.DiffUtil
@@ -29,6 +30,9 @@ class AstroPicturesAdapter(private val vm: AstroPicturesViewModel) :
     inner class HeaderViewHolder(private val binding: ItemHeaderPictureBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AstroPicture) {
+            val name = binding.root.context.getString(R.string.shared_picture).plus(layoutPosition)
+
+            ViewCompat.setTransitionName(binding.ivThumbs, name)
             binding.astroPicture = item
             binding.executePendingBindings()
         }
@@ -38,6 +42,9 @@ class AstroPicturesAdapter(private val vm: AstroPicturesViewModel) :
     inner class BodyViewHolder(private val binding: ItemBodyPictureBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AstroPicture) {
+            val name = binding.root.context.getString(R.string.shared_picture).plus(layoutPosition)
+
+            ViewCompat.setTransitionName(binding.ivThumbs, name)
             binding.astroPicture = item
             binding.executePendingBindings()
         }
@@ -86,7 +93,6 @@ class AstroPicturesAdapter(private val vm: AstroPicturesViewModel) :
             }
         }
 
-
         when (getItemViewType(position)) {
             ViewType.Header.ordinal -> (holder as HeaderViewHolder).bind(item!!)
             ViewType.Body.ordinal -> (holder as BodyViewHolder).bind(item!!)
@@ -99,8 +105,14 @@ class AstroPicturesAdapter(private val vm: AstroPicturesViewModel) :
         val extras =
             FragmentNavigatorExtras(imageView to imageView.transitionName)
 
-        view.findNavController()
-            .navigate(R.id.navigate_to_detail_from_pager, bundleOf("item" to item), null, extras)
+        Timber.d(imageView.transitionName)
+
+        view.findNavController().navigate(
+            R.id.navigate_to_detail_from_pager,
+            bundleOf("item" to item, "name" to imageView.transitionName),
+            null,
+            extras
+        )
     }
 
     override fun getItemViewType(position: Int): Int {

@@ -14,12 +14,10 @@ import com.oseong.ifeelalive.ui.main.adapter.AstroPicturesPagerAdapter
 
 import com.oseong.ifeelalive.ui.main.adapter.ASTRO_PICTURES_INDEX
 import com.oseong.ifeelalive.ui.main.adapter.FAVORITE_ASTRO_PICTURE_INDEX
+import com.oseong.ifeelalive.utils.setStatusBarColor
+import timber.log.Timber
 
 class HomeViewPagerFragment : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,6 +37,19 @@ class HomeViewPagerFragment : Fragment() {
 
             root
         }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
+        with(requireActivity()) {
+            setStatusBarColor(resources.getColor(R.color.black))
+        }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        Timber.d("lifeCycle")
     }
 
     private fun getTabIcon(pos: Int): Int {

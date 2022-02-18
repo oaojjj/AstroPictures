@@ -1,10 +1,12 @@
 package com.oseong.ifeelalive.ui.astropictures
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,23 +23,26 @@ class AstronomyPicturesFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val vm: AstroPicturesViewModel by viewModels()
+    private var astroAdapter: AstroPicturesAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         _binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_astronomy_pictures, container, false
         )
 
-        Timber.d("lifeCycle")
 
-        val astroAdapter = AstroPicturesAdapter(vm)
+        if (astroAdapter == null) {
+            astroAdapter = AstroPicturesAdapter(vm)
+        }
 
         return with(binding) {
             this.viewModel = vm
             lifecycleOwner = this@AstronomyPicturesFragment
-            rvAstroPictures.apply {
+            rvAstroPictures.run {
                 this.adapter = astroAdapter
                 layoutManager = LinearLayoutManager(activity)
             }
@@ -47,6 +52,9 @@ class AstronomyPicturesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        view.doOnPreDraw {
+            parentFragment?.startPostponedEnterTransition()
+        }
         vm.loadAstroPictures()
     }
 
