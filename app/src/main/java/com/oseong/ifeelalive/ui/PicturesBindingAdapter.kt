@@ -7,6 +7,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.oseong.ifeelalive.data.AstroPictureItem
+import com.oseong.ifeelalive.ui.astropictures.AstroPicturesViewModel
 import com.oseong.ifeelalive.ui.astropictures.adapter.AstroPicturesAdapter
 import timber.log.Timber
 
@@ -17,6 +18,19 @@ fun bindImageFromUrl(view: ImageView, imageUrl: String?) {
             .load(imageUrl)
             .into(view)
     }
+}
+
+@BindingAdapter("app:scrollListener")
+fun bindScrollListener(listView: RecyclerView, viewModel: AstroPicturesViewModel) {
+    listView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+            if (!recyclerView.canScrollVertically(1)) {
+                Timber.d("end recyclerView")
+                viewModel.loadMoreAstroPictures()
+            }
+        }
+    })
 }
 
 @BindingAdapter("app:items")

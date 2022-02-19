@@ -1,6 +1,5 @@
 package com.oseong.ifeelalive.ui.astropictures
 
-import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -23,25 +22,22 @@ class AstronomyPicturesFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val vm: AstroPicturesViewModel by viewModels()
-    private var astroAdapter: AstroPicturesAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = DataBindingUtil.inflate(
             inflater, R.layout.fragment_astronomy_pictures, container, false
         )
 
 
-        if (astroAdapter == null) {
-            astroAdapter = AstroPicturesAdapter(vm)
-        }
+        val astroAdapter = AstroPicturesAdapter(vm)
 
         return with(binding) {
             this.viewModel = vm
             lifecycleOwner = this@AstronomyPicturesFragment
+
             rvAstroPictures.run {
                 this.adapter = astroAdapter
                 layoutManager = LinearLayoutManager(activity)

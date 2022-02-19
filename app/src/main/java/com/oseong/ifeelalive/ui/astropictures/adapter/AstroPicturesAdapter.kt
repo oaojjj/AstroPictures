@@ -63,19 +63,6 @@ class AstroPicturesAdapter(private val vm: AstroPicturesViewModel) :
 
     inner class FooterViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
-        super.onAttachedToRecyclerView(recyclerView)
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-                if (!recyclerView.canScrollVertically(1)) {
-                    Timber.d("end recyclerView")
-                    vm.loadMoreAstroPictures()
-                }
-            }
-        })
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return when (viewType) {

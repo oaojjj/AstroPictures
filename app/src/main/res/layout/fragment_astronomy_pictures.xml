@@ -22,7 +22,8 @@
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:scrollbarThumbVertical="@color/white"
             android:scrollbars="vertical"
-            app:items="@{viewModel.items}" />
+            app:items="@{viewModel.items}"
+            app:scrollListener="@{viewModel}" />
 
         <ProgressBar
             style="?attr/progressBarStyle"
