@@ -1,4 +1,4 @@
-package com.oseong.ifeelalive.ui.astropicturedetail
+package com.oseong.ifeelalive.astropicturedetail
 
 import android.content.Context
 import android.os.Bundle
@@ -14,7 +14,6 @@ import com.oseong.ifeelalive.R
 import com.oseong.ifeelalive.data.AstroPicture
 import com.oseong.ifeelalive.databinding.FragmentAstroPictureDetailBinding
 import com.oseong.ifeelalive.utils.setStatusBarColor
-import timber.log.Timber
 import kotlin.math.abs
 
 class AstroPictureDetailFragment : Fragment() {

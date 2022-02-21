@@ -1,4 +1,4 @@
-package com.oseong.ifeelalive.ui.main
+package com.oseong.ifeelalive.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -1,4 +1,4 @@
-package com.oseong.ifeelalive.ui.astropictures
+package com.oseong.ifeelalive.astropictures
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,8 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.oseong.ifeelalive.R
+import com.oseong.ifeelalive.astropictures.adapter.AstroPicturesAdapter
 import com.oseong.ifeelalive.databinding.FragmentAstronomyPicturesBinding
-import com.oseong.ifeelalive.ui.astropictures.adapter.AstroPicturesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -32,7 +32,7 @@ class AstronomyPicturesFragment : Fragment() {
         )
 
 
-        val astroAdapter = AstroPicturesAdapter(vm)
+        val astroAdapter = AstroPicturesAdapter()
 
         return with(binding) {
             this.viewModel = vm
@@ -51,7 +51,6 @@ class AstronomyPicturesFragment : Fragment() {
         view.doOnPreDraw {
             parentFragment?.startPostponedEnterTransition()
         }
-        vm.loadAstroPictures()
     }
 
     override fun onDestroyView() {

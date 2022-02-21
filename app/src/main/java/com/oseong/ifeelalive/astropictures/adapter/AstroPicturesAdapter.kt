@@ -1,4 +1,4 @@
-package com.oseong.ifeelalive.ui.astropictures.adapter
+package com.oseong.ifeelalive.astropictures.adapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -17,14 +17,14 @@ import com.oseong.ifeelalive.data.AstroPicture
 import com.oseong.ifeelalive.data.AstroPictureItem
 import com.oseong.ifeelalive.databinding.ItemBodyPictureBinding
 import com.oseong.ifeelalive.databinding.ItemHeaderPictureBinding
-import com.oseong.ifeelalive.ui.astropictures.AstroPicturesViewModel
+import com.oseong.ifeelalive.astropictures.AstroPicturesViewModel
 import timber.log.Timber
 
 enum class ViewType {
     Header, Body, Footer
 }
 
-class AstroPicturesAdapter(private val vm: AstroPicturesViewModel) :
+class AstroPicturesAdapter() :
     ListAdapter<AstroPictureItem, RecyclerView.ViewHolder>(AstroPictureDiffCallback) {
 
     // today astronomy picture

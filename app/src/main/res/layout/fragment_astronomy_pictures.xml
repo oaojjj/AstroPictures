@@ -2,13 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.astropictures.AstronomyPicturesFragment">
+    tools:context=".astropictures.AstronomyPicturesFragment">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.oseong.ifeelalive.ui.astropictures.AstroPicturesViewModel" />
+            type="com.oseong.ifeelalive.astropictures.AstroPicturesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -23,7 +23,7 @@
             android:scrollbarThumbVertical="@color/white"
             android:scrollbars="vertical"
             app:items="@{viewModel.items}"
-            app:scrollListener="@{viewModel}" />
+            app:endScrollListener="@{viewModel.loadMoreAstroPictures}" />
 
         <ProgressBar
             style="?attr/progressBarStyle"

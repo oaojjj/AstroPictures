@@ -1,4 +1,4 @@
-package com.oseong.ifeelalive.ui.astropicturedetail
+package com.oseong.ifeelalive.astropicturedetail
 
 import androidx.lifecycle.ViewModel
 

@@ -1,10 +1,9 @@
-package com.oseong.ifeelalive.ui.main.adapter
+package com.oseong.ifeelalive.main.adapter
 
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.oseong.ifeelalive.ui.astropictures.AstronomyPicturesFragment
-import com.oseong.ifeelalive.ui.favoritepictures.FavoritePicturesFragment
-import timber.log.Timber
+import com.oseong.ifeelalive.astropictures.AstronomyPicturesFragment
+import com.oseong.ifeelalive.favoritepictures.FavoritePicturesFragment
 import java.lang.IndexOutOfBoundsException
 
 const val ASTRO_PICTURES_INDEX = 0
