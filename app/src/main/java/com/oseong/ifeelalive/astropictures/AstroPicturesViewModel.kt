@@ -27,6 +27,7 @@ class AstroPicturesViewModel @Inject constructor(
     private val _loading = MutableLiveData(true)
 
     private val _error = MutableLiveData(false)
+    val error = _error
 
     private val _firstLoad = MutableLiveData(true)
     val firstLoading = _firstLoad
@@ -63,10 +64,10 @@ class AstroPicturesViewModel @Inject constructor(
     }
 
     private fun getAstroPictureItems(data: List<AstroPicture>): MutableList<AstroPictureItem> {
-        val astroPictureItems = mutableListOf<AstroPictureItem>()
+        val astroPictureItems = items.value?.toMutableList() ?: mutableListOf()
 
-        if (!items.value.isNullOrEmpty()) {
-            astroPictureItems.addAll(items.value!!)
+        // 리스트가 비어있지 않다면, footer(progressBar)를 삭제한다.
+        if (!astroPictureItems.isNullOrEmpty()) {
             astroPictureItems.removeLast()
         }
 
@@ -75,7 +76,7 @@ class AstroPicturesViewModel @Inject constructor(
                 if (_firstLoad.value!!) {
                     _firstLoad.value = false
                     AstroPictureItem(picture, ViewType.Header)
-                } else AstroPictureItem(picture)
+                } else AstroPictureItem(picture, ViewType.Body)
             )
         }
 
@@ -89,7 +90,7 @@ class AstroPicturesViewModel @Inject constructor(
      * @param ed endDate
      * ex) sd ~ ed -> 2020-02-02 ~ 2020-02-09
      */
-    fun loadAstroPictures(sd: LocalDate, ed: LocalDate) = viewModelScope.launch {
+    private fun loadAstroPictures(sd: LocalDate, ed: LocalDate) = viewModelScope.launch {
         _items.value = Resource.Loading()
         val response = picturesRepository.getAstroPictures(sd, ed)
 

@@ -17,14 +17,13 @@ import com.oseong.ifeelalive.data.AstroPicture
 import com.oseong.ifeelalive.data.AstroPictureItem
 import com.oseong.ifeelalive.databinding.ItemBodyPictureBinding
 import com.oseong.ifeelalive.databinding.ItemHeaderPictureBinding
-import com.oseong.ifeelalive.astropictures.AstroPicturesViewModel
 import timber.log.Timber
 
 enum class ViewType {
     Header, Body, Footer
 }
 
-class AstroPicturesAdapter() :
+class AstroPicturesAdapter :
     ListAdapter<AstroPictureItem, RecyclerView.ViewHolder>(AstroPictureDiffCallback) {
 
     // today astronomy picture
@@ -121,9 +120,7 @@ class AstroPicturesAdapter() :
         )
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return getItem(position).type.ordinal
-    }
+    override fun getItemViewType(position: Int): Int = getItem(position).type.ordinal
 
     object AstroPictureDiffCallback : DiffUtil.ItemCallback<AstroPictureItem>() {
 

@@ -1,4 +1,4 @@
-package com.oseong.ifeelalive.utils
+package com.oseong.ifeelalive.bindingadapter
 
 import android.view.View
 import android.widget.ImageView
@@ -23,6 +23,7 @@ fun bindEndScrollListener(listView: RecyclerView, loadMore: () -> Unit) {
     listView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
+            Timber.d("$dx,$dy")
             if (!recyclerView.canScrollVertically(1)) {
                 Timber.d("end recyclerView")
                 loadMore.invoke()

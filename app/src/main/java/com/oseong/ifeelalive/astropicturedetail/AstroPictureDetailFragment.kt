@@ -53,15 +53,17 @@ class AstroPictureDetailFragment : Fragment() {
             this.item = astroPicture
 
             appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-                if (abs(verticalOffset) - appBarLayout.totalScrollRange == 0) {
-                    //  Collapsed
-                    toolbarTitle.setTextAppearance(R.style.collapsedTitleStyle)
-                    // style에서는 왜 설정이 안되는가?..
-                    toolbarTitle.maxLines = 1
-                } else {
-                    //Expanded
-                    toolbarTitle.setTextAppearance(R.style.expandedTitleStyle)
-                    toolbarTitle.maxLines = 2
+                appbar.post {
+                    if (abs(verticalOffset) - appBarLayout.totalScrollRange == 0) {
+                        //  Collapsed
+                        toolbarTitle.setTextAppearance(R.style.collapsedTitleStyle)
+                        // style에서는 왜 설정이 안되는가?..
+                        toolbarTitle.maxLines = 1
+                    } else {
+                        //Expanded
+                        toolbarTitle.setTextAppearance(R.style.expandedTitleStyle)
+                        toolbarTitle.maxLines = 2
+                    }
                 }
             })
 

@@ -5,10 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.oseong.ifeelalive.R
 import com.oseong.ifeelalive.astropictures.adapter.AstroPicturesAdapter
 import com.oseong.ifeelalive.databinding.FragmentAstronomyPicturesBinding
@@ -31,7 +34,6 @@ class AstronomyPicturesFragment : Fragment() {
             inflater, R.layout.fragment_astronomy_pictures, container, false
         )
 
-
         val astroAdapter = AstroPicturesAdapter()
 
         return with(binding) {
@@ -51,6 +53,14 @@ class AstronomyPicturesFragment : Fragment() {
         view.doOnPreDraw {
             parentFragment?.startPostponedEnterTransition()
         }
+
+        vm.error.observe(this, {
+            if (it) {
+                Toast.makeText(
+                    requireContext(), "데이터를 불러오던 중, 에러가 발생했습니다.", Toast.LENGTH_SHORT
+                ).show()
+            }
+        })
     }
 
     override fun onDestroyView() {
