@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
+import androidx.core.view.marginEnd
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.appbar.AppBarLayout
 import com.oseong.ifeelalive.R
