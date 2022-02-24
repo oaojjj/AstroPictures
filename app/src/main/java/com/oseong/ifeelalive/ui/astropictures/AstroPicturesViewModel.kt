@@ -1,4 +1,4 @@
-package com.oseong.ifeelalive.astropictures
+package com.oseong.ifeelalive.ui.astropictures
 
 import android.app.Application
 import androidx.lifecycle.*
@@ -7,7 +7,7 @@ import com.oseong.ifeelalive.data.AstroPicture
 import com.oseong.ifeelalive.data.AstroPictureItem
 import com.oseong.ifeelalive.data.Resource
 import com.oseong.ifeelalive.data.source.PicturesRepository
-import com.oseong.ifeelalive.astropictures.adapter.ViewType
+import com.oseong.ifeelalive.ui.astropictures.adapter.ViewType
 import com.oseong.ifeelalive.utils.minusTwoWeeks
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

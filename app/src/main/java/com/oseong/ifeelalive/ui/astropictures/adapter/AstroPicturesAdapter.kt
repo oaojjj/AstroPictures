@@ -1,10 +1,9 @@
-package com.oseong.ifeelalive.astropictures.adapter
+package com.oseong.ifeelalive.ui.astropictures.adapter
 
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
+import androidx.cardview.widget.CardView
 import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.navigation.findNavController
@@ -31,11 +30,9 @@ class AstroPicturesAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AstroPicture) {
             with(binding.root.context) {
-                val ivName = getString(R.string.shared_picture).plus(layoutPosition)
-                val tvName = getString(R.string.shared_title).plus(layoutPosition)
+                val viewName = getString(R.string.shared_view).plus(layoutPosition)
 
-                ViewCompat.setTransitionName(binding.ivThumbs, ivName)
-                ViewCompat.setTransitionName(binding.tvTitle, tvName)
+                ViewCompat.setTransitionName(binding.cardContainer, viewName)
             }
 
             binding.astroPicture = item
@@ -48,11 +45,10 @@ class AstroPicturesAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AstroPicture) {
             with(binding.root.context) {
-                val ivName = getString(R.string.shared_picture).plus(layoutPosition)
-                val tvName = getString(R.string.shared_title).plus(layoutPosition)
+                val viewName = getString(R.string.shared_view).plus(layoutPosition)
 
-                ViewCompat.setTransitionName(binding.ivThumbs, ivName)
-                ViewCompat.setTransitionName(binding.tvTitle, tvName)
+                ViewCompat.setTransitionName(binding.cardContainer, viewName)
+
             }
 
             binding.astroPicture = item
@@ -97,23 +93,15 @@ class AstroPicturesAdapter :
     }
 
     private fun navigateToDetail(item: AstroPicture, view: View) {
-        val imageView = view.findViewById<ImageView>(R.id.iv_thumbs)
-        val titleView = view.findViewById<TextView>(R.id.tv_title)
+        val cardView = view.findViewById<CardView>(R.id.card_container)
 
-        val extras =
-            FragmentNavigatorExtras(
-                imageView to imageView.transitionName,
-                titleView to titleView.transitionName
-            )
-
-        Timber.d(imageView.transitionName)
+        val extras = FragmentNavigatorExtras(cardView to cardView.transitionName)
 
         view.findNavController().navigate(
             R.id.navigate_to_detail_from_pager,
             bundleOf(
                 "item" to item,
-                "name" to imageView.transitionName,
-                "title" to titleView.transitionName
+                "view" to cardView.transitionName
             ),
             null,
             extras

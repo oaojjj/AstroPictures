@@ -12,6 +12,7 @@
     </data>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/card_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="12dp"
@@ -19,6 +20,7 @@
         android:layout_marginBottom="8dp"
         android:clickable="true"
         android:foreground="?android:attr/selectableItemBackground"
+        android:transitionName="@string/shared_view"
         app:cardElevation="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout

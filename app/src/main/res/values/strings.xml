@@ -5,4 +5,5 @@
     <string name="favorite_astro_pictures">FAVORITE PICTURES</string>
     <string name="shared_picture" translatable="false">shared_picture</string>
     <string name="shared_title" translatable="false">shared_title</string>
+    <string name="shared_view" translatable="false">shared_view</string>
 </resources>

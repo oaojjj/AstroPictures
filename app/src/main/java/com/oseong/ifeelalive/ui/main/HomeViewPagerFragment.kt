@@ -1,4 +1,4 @@
-package com.oseong.ifeelalive.main
+package com.oseong.ifeelalive.ui.main
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,14 +10,17 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.oseong.ifeelalive.R
 import com.oseong.ifeelalive.databinding.FragmentHomeViewPagerBinding
-import com.oseong.ifeelalive.main.adapter.AstroPicturesPagerAdapter
-
-import com.oseong.ifeelalive.main.adapter.ASTRO_PICTURES_INDEX
-import com.oseong.ifeelalive.main.adapter.FAVORITE_ASTRO_PICTURE_INDEX
+import com.oseong.ifeelalive.ui.main.adapter.ASTRO_PICTURES_INDEX
+import com.oseong.ifeelalive.ui.main.adapter.AstroPicturesPagerAdapter
+import com.oseong.ifeelalive.ui.main.adapter.FAVORITE_ASTRO_PICTURE_INDEX
 import com.oseong.ifeelalive.utils.setStatusBarColor
 import timber.log.Timber
 
 class HomeViewPagerFragment : Fragment() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +44,6 @@ class HomeViewPagerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        postponeEnterTransition()
         with(requireActivity()) {
             setStatusBarColor(resources.getColor(R.color.black))
         }

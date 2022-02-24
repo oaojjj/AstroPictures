@@ -1,4 +1,4 @@
-package com.oseong.ifeelalive.astropictures
+package com.oseong.ifeelalive.ui.astropictures
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,10 +10,9 @@ import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SimpleItemAnimator
+import com.google.android.material.transition.Hold
 import com.oseong.ifeelalive.R
-import com.oseong.ifeelalive.astropictures.adapter.AstroPicturesAdapter
+import com.oseong.ifeelalive.ui.astropictures.adapter.AstroPicturesAdapter
 import com.oseong.ifeelalive.databinding.FragmentAstronomyPicturesBinding
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
@@ -25,6 +24,10 @@ class AstronomyPicturesFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val vm: AstroPicturesViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,6 +53,7 @@ class AstronomyPicturesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        parentFragment?.postponeEnterTransition()
         view.doOnPreDraw {
             parentFragment?.startPostponedEnterTransition()
         }
@@ -57,7 +61,7 @@ class AstronomyPicturesFragment : Fragment() {
         vm.error.observe(this, {
             if (it) {
                 Toast.makeText(
-                    requireContext(), "데이터를 불러오던 중, 에러가 발생했습니다.", Toast.LENGTH_SHORT
+                    requireContext(), "데이터를 불러오던 중 에러가 발생했습니다.", Toast.LENGTH_SHORT
                 ).show()
             }
         })

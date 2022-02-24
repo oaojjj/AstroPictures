@@ -1,4 +1,4 @@
-package com.oseong.ifeelalive.bindingadapter
+package com.oseong.ifeelalive.ui
 
 import android.view.View
 import android.widget.ImageView
@@ -6,7 +6,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.oseong.ifeelalive.data.AstroPictureItem
-import com.oseong.ifeelalive.astropictures.adapter.AstroPicturesAdapter
+import com.oseong.ifeelalive.ui.astropictures.adapter.AstroPicturesAdapter
 import timber.log.Timber
 
 @BindingAdapter("app:imageFromUrl")

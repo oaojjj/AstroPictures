@@ -1,4 +1,4 @@
-package com.oseong.ifeelalive.favoritepictures
+package com.oseong.ifeelalive.ui.favoritepictures
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

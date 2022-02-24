@@ -1,4 +1,4 @@
-package com.oseong.ifeelalive.astropicturedetail
+package com.oseong.ifeelalive.ui.astropicturedetail
 
 import android.content.Context
 import android.os.Bundle
@@ -8,13 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
-import androidx.core.view.marginEnd
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.transition.MaterialContainerTransform
 import com.oseong.ifeelalive.R
 import com.oseong.ifeelalive.data.AstroPicture
 import com.oseong.ifeelalive.databinding.FragmentAstroPictureDetailBinding
 import com.oseong.ifeelalive.utils.setStatusBarColor
+import timber.log.Timber
 import kotlin.math.abs
 
 class AstroPictureDetailFragment : Fragment() {
@@ -33,11 +34,18 @@ class AstroPictureDetailFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val animation =
-            TransitionInflater.from(context).inflateTransition(android.R.transition.move)
+        initTransitionElement()
+    }
 
-        sharedElementEnterTransition = animation
-        sharedElementReturnTransition = animation
+    private fun initTransitionElement() {
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            duration = 1000
+        }
+        sharedElementReturnTransition = MaterialContainerTransform().apply {
+            duration = 1000
+        }
+        /*TransitionInflater.from(context).inflateTransition(android.R.transition.move)?.let {
+        }*/
     }
 
     override fun onCreateView(
@@ -52,6 +60,10 @@ class AstroPictureDetailFragment : Fragment() {
         )
         return with(binding) {
             this.item = astroPicture
+
+            fab.setOnClickListener {
+                Timber.d("click-fab")
+            }
 
             appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
                 appbar.post {
@@ -74,12 +86,20 @@ class AstroPictureDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initTransitionName()
+    }
 
-        val imageTransitionName = arguments?.getString("name")
-        val titleTransitionName = arguments?.getString("title")
+    private fun initTransitionName() {
+        /*arguments?.getString("name").let {
+            ViewCompat.setTransitionName(binding.ivImage, it)
+        }
 
-        ViewCompat.setTransitionName(binding.ivImage, imageTransitionName)
-        ViewCompat.setTransitionName(binding.toolbarTitle, titleTransitionName)
+        arguments?.getString("title").let {
+            ViewCompat.setTransitionName(binding.toolbarTitle, it)
+        }*/
+        arguments?.getString("view").let {
+            ViewCompat.setTransitionName(binding.coordinatorLayout, it)
+        }
     }
 
     override fun onDestroyView() {

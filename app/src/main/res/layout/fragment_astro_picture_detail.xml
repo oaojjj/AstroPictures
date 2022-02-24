@@ -2,7 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".astropicturedetail.AstroPictureDetailFragment">
+    tools:context=".ui.astropicturedetail.AstroPictureDetailFragment">
 
     <data>
 
@@ -12,9 +12,12 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/coordinator_layout"
+        android:background="@color/grey_900"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:transitionName="@string/shared_view">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appbar"
