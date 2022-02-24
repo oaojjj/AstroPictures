@@ -3,6 +3,8 @@ package com.oseong.ifeelalive.ui.astropictures.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
@@ -31,7 +33,6 @@ class AstroPicturesAdapter :
         fun bind(item: AstroPicture) {
             with(binding.root.context) {
                 val viewName = getString(R.string.shared_view).plus(layoutPosition)
-
                 ViewCompat.setTransitionName(binding.cardContainer, viewName)
             }
 
@@ -46,11 +47,12 @@ class AstroPicturesAdapter :
         fun bind(item: AstroPicture) {
             with(binding.root.context) {
                 val viewName = getString(R.string.shared_view).plus(layoutPosition)
-
                 ViewCompat.setTransitionName(binding.cardContainer, viewName)
-
+                /*
+                val imageName = getString(R.string.shared_picture).plus(layoutPosition)
+                ViewCompat.setTransitionName(binding.ivThumbs, imageName)
+                */
             }
-
             binding.astroPicture = item
             binding.executePendingBindings()
         }
@@ -94,8 +96,11 @@ class AstroPicturesAdapter :
 
     private fun navigateToDetail(item: AstroPicture, view: View) {
         val cardView = view.findViewById<CardView>(R.id.card_container)
+        // val imageView = view.findViewById<ImageView>(R.id.iv_thumbs)
 
-        val extras = FragmentNavigatorExtras(cardView to cardView.transitionName)
+        val extras = FragmentNavigatorExtras(
+            cardView to cardView.transitionName
+        )
 
         view.findNavController().navigate(
             R.id.navigate_to_detail_from_pager,

@@ -22,7 +22,7 @@ data class AstroPicture(
 ) : Serializable {
 
     fun getCopyrightAndDate(): String {
-        return "${copyright()} / $date"
+        return "${copyrightOrUnKnown()} / $date"
     }
 
     fun getThumbnail(): String? {
@@ -40,7 +40,7 @@ data class AstroPicture(
         return media_type == "image"
     }
 
-    private fun copyright(): String {
+    fun copyrightOrUnKnown(): String {
         return copyright ?: "UnKnown"
     }
 

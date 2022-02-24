@@ -53,6 +53,8 @@ class AstronomyPicturesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        enterTransition = Hold()
+
         parentFragment?.postponeEnterTransition()
         view.doOnPreDraw {
             parentFragment?.startPostponedEnterTransition()
@@ -76,5 +78,4 @@ class AstronomyPicturesFragment : Fragment() {
     companion object {
         const val FRAGMENT_TAG = "AstronomyPicturesFragment"
     }
-
 }

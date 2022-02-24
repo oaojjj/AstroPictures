@@ -10,6 +10,7 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import timber.log.Timber
 import javax.inject.Singleton
 
 @Module
@@ -25,12 +26,12 @@ object ApiModule {
         val apiInterceptor = Interceptor {
             val originRequest = it.request()
 
-            val addApiAndSortUrl = originRequest.url.newBuilder()
+            val addApiKeyRequest = originRequest.url.newBuilder()
                 .addQueryParameter("api_key", BuildConfig.API_KEY)
                 .build()
 
             val newRequest = originRequest.newBuilder()
-                .url(addApiAndSortUrl)
+                .url(addApiKeyRequest)
                 .build()
 
             it.proceed(newRequest)

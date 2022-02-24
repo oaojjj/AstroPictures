@@ -2,7 +2,6 @@ package com.oseong.ifeelalive.ui.astropicturedetail
 
 import android.content.Context
 import android.os.Bundle
-import android.transition.TransitionInflater
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +9,7 @@ import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.color.MaterialColors
 import com.google.android.material.transition.MaterialContainerTransform
 import com.oseong.ifeelalive.R
 import com.oseong.ifeelalive.data.AstroPicture
@@ -39,12 +39,23 @@ class AstroPictureDetailFragment : Fragment() {
 
     private fun initTransitionElement() {
         sharedElementEnterTransition = MaterialContainerTransform().apply {
-            duration = 1000
+            duration = 650
+            drawingViewId = R.id.nav_host
+            //containerColor = MaterialColors.getColor(requireActivity().findViewById(android.R.id.content), R.attr.colorSurface)
+            fadeMode = MaterialContainerTransform.FADE_MODE_OUT
+            isElevationShadowEnabled = true
         }
-        sharedElementReturnTransition = MaterialContainerTransform().apply {
-            duration = 1000
-        }
-        /*TransitionInflater.from(context).inflateTransition(android.R.transition.move)?.let {
+
+        /*with(sharedElementEnterTransition as MaterialContainerTransform) {
+            addListener(object : TransitionListenerAdapter() {
+                override fun onTransitionEnd(transition: Transition) {
+                    removeListener(this)
+                    if (isHoldAtEndEnabled) {
+                        return
+                    }
+                    super.onTransitionEnd(transition)
+                }
+            })
         }*/
     }
 
@@ -90,16 +101,14 @@ class AstroPictureDetailFragment : Fragment() {
     }
 
     private fun initTransitionName() {
-        /*arguments?.getString("name").let {
-            ViewCompat.setTransitionName(binding.ivImage, it)
-        }
-
-        arguments?.getString("title").let {
-            ViewCompat.setTransitionName(binding.toolbarTitle, it)
-        }*/
         arguments?.getString("view").let {
             ViewCompat.setTransitionName(binding.coordinatorLayout, it)
         }
+        /*
+        arguments?.getString("image").let {
+            ViewCompat.setTransitionName(binding.ivImage, it)
+        }
+        */
     }
 
     override fun onDestroyView() {
@@ -111,3 +120,4 @@ class AstroPictureDetailFragment : Fragment() {
         const val FRAGMENT_TAG = "AstronomyPictureFragment"
     }
 }
+
