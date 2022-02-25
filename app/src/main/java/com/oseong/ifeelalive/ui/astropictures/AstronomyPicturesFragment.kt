@@ -63,6 +63,12 @@ class AstronomyPicturesFragment : Fragment() {
         vm.message.observe(this, {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         })
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            Timber.d("refresh")
+            vm.refreshPictures()
+            binding.swipeRefreshLayout.isRefreshing = false
+        }
     }
 
     override fun onDestroyView() {

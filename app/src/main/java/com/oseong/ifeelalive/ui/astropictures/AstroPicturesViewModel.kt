@@ -1,7 +1,6 @@
 package com.oseong.ifeelalive.ui.astropictures
 
 import android.app.Application
-import android.widget.Toast
 import androidx.lifecycle.*
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.oseong.ifeelalive.data.AstroPicture
@@ -25,16 +24,23 @@ class AstroPicturesViewModel @Inject constructor(
 ) : AndroidViewModel(application) {
 
     private val _items: MutableLiveData<Resource<List<AstroPicture>>> = MutableLiveData()
-
     val items: LiveData<List<AstroPictureItem>> = _items.switchMap { handleAstroPictureItems(it) }
-
-    private val _loading = MutableLiveData(true)
 
     private val _message = MutableLiveData<String>()
     val message: LiveData<String> = _message
 
+    private val _loading = MutableLiveData(true)
+
     private val _firstLoad = MutableLiveData(true)
-    val firstLoading = _firstLoad
+
+    val loading: LiveData<Boolean> = Transformations.map(_loading) {
+        // 둘다 true 일때만 정면 로딩바 뜨기
+        it.and(_firstLoad.value!!)
+    }
+
+    val isEmpty: LiveData<Boolean> = Transformations.map(items) {
+        it.isNullOrEmpty()
+    }
 
     // 날짜 선택 기능 추가 생각해보기.
     private var pagingDate: LocalDate
@@ -44,12 +50,6 @@ class AstroPicturesViewModel @Inject constructor(
         pagingDate = LocalDate.now()
         loadAstroPictures(pagingDate.minusTwoWeeks(), pagingDate)
     }
-
-/*
-    val loading: LiveData<Boolean> = Transformations.map(_loading) {
-        it.or(_error.value!!)
-    }
-*/
 
     private fun handleAstroPictureItems(resource: Resource<List<AstroPicture>>): LiveData<List<AstroPictureItem>> {
         val result = MutableLiveData<List<AstroPictureItem>>()
@@ -62,11 +62,18 @@ class AstroPicturesViewModel @Inject constructor(
             is Resource.Loading -> _loading.value = true
             is Resource.Error -> _message.value = "에러가 발생했습니다."
         }
+        if (_firstLoad.value!!) {
+            result.value = emptyList()
+        }
         return result
     }
 
     private fun getAstroPictureItems(data: List<AstroPicture>): MutableList<AstroPictureItem> {
-        val astroPictureItems = items.value?.toMutableList() ?: mutableListOf()
+        val astroPictureItems = if (_firstLoad.value!!) {
+            mutableListOf()
+        } else {
+            items.value?.toMutableList()!!
+        }
 
         // 리스트가 비어있지 않다면, footer(progressBar)를 삭제한다.
         if (!astroPictureItems.isNullOrEmpty()) {
@@ -92,8 +99,9 @@ class AstroPicturesViewModel @Inject constructor(
      * @param ed endDate
      * ex) sd ~ ed -> 2020-02-02 ~ 2020-02-09
      */
-    private fun loadAstroPictures(sd: LocalDate, ed: LocalDate) =
+    fun loadAstroPictures(sd: LocalDate, ed: LocalDate) =
         viewModelScope.launch(Dispatchers.IO) {
+            Timber.d("picture")
             _items.postValue(Resource.Loading())
             try {
                 val response = picturesRepository.getAstroPictures(sd, ed)
@@ -108,11 +116,21 @@ class AstroPicturesViewModel @Inject constructor(
             } catch (e: Exception) {
                 if (e is UnknownHostException) {
                     _message.postValue("인터넷을 연결해 주세요.")
+                    _loading.postValue(false)
                 }
             }
         }
 
     fun loadMoreAstroPictures() {
+        Timber.d("loadMore")
+        loadAstroPictures(pagingDate.minusTwoWeeks(), pagingDate)
+    }
+
+    fun refreshPictures() {
+        Timber.d("refresh")
+        _firstLoad.value = true
+        _loading.value = true
+        pagingDate = LocalDate.now()
         loadAstroPictures(pagingDate.minusTwoWeeks(), pagingDate)
     }
 }

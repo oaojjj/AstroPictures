@@ -2,7 +2,9 @@ package com.oseong.ifeelalive.ui
 
 import android.view.View
 import android.widget.ImageView
+import androidx.core.view.isNotEmpty
 import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.oseong.ifeelalive.R
@@ -25,7 +27,7 @@ fun bindEndScrollListener(listView: RecyclerView, loadMore: () -> Unit) {
     listView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
-            if (!recyclerView.canScrollVertically(1)) {
+            if (!recyclerView.canScrollVertically(1) && recyclerView.canScrollVertically(-1)) {
                 Timber.d("end recyclerView")
                 loadMore.invoke()
             }
