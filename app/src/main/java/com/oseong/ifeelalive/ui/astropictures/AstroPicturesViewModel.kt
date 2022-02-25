@@ -1,6 +1,7 @@
 package com.oseong.ifeelalive.ui.astropictures
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.jakewharton.threetenabp.AndroidThreeTen
 import com.oseong.ifeelalive.data.AstroPicture
@@ -10,8 +11,11 @@ import com.oseong.ifeelalive.data.source.PicturesRepository
 import com.oseong.ifeelalive.ui.astropictures.adapter.ViewType
 import com.oseong.ifeelalive.utils.minusTwoWeeks
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.threeten.bp.LocalDate
+import timber.log.Timber
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,18 +30,17 @@ class AstroPicturesViewModel @Inject constructor(
 
     private val _loading = MutableLiveData(true)
 
-    private val _error = MutableLiveData(false)
-    val error = _error
+    private val _message = MutableLiveData<String>()
+    val message: LiveData<String> = _message
 
     private val _firstLoad = MutableLiveData(true)
     val firstLoading = _firstLoad
 
     // 날짜 선택 기능 추가 생각해보기.
-    private lateinit var pagingDate: LocalDate
+    private var pagingDate: LocalDate
 
     init {
         AndroidThreeTen.init(application)
-
         pagingDate = LocalDate.now()
         loadAstroPictures(pagingDate.minusTwoWeeks(), pagingDate)
     }
@@ -54,11 +57,10 @@ class AstroPicturesViewModel @Inject constructor(
             is Resource.Success -> {
                 result.value = getAstroPictureItems(resource.data)
                 _loading.value = false
-                _error.value = false
                 return result
             }
             is Resource.Loading -> _loading.value = true
-            is Resource.Error -> _error.value = true
+            is Resource.Error -> _message.value = "에러가 발생했습니다."
         }
         return result
     }
@@ -90,20 +92,25 @@ class AstroPicturesViewModel @Inject constructor(
      * @param ed endDate
      * ex) sd ~ ed -> 2020-02-02 ~ 2020-02-09
      */
-    private fun loadAstroPictures(sd: LocalDate, ed: LocalDate) = viewModelScope.launch {
-        _items.value = Resource.Loading()
-        val response = picturesRepository.getAstroPictures(sd, ed)
-
-        if (response.isSuccessful) {
-            response.body()?.let { result ->
-                _items.value = Resource.Success(result.reversed())
+    private fun loadAstroPictures(sd: LocalDate, ed: LocalDate) =
+        viewModelScope.launch(Dispatchers.IO) {
+            _items.postValue(Resource.Loading())
+            try {
+                val response = picturesRepository.getAstroPictures(sd, ed)
+                if (response.isSuccessful) {
+                    response.body()?.let { result ->
+                        _items.postValue(Resource.Success(result.reversed()))
+                        pagingDate = sd.minusDays(1)
+                    }
+                } else {
+                    _items.postValue(Resource.Error(response.message()))
+                }
+            } catch (e: Exception) {
+                if (e is UnknownHostException) {
+                    _message.postValue("인터넷을 연결해 주세요.")
+                }
             }
-        } else {
-            _items.value = Resource.Error(response.message())
         }
-
-        pagingDate = sd.minusDays(1)
-    }
 
     fun loadMoreAstroPictures() {
         loadAstroPictures(pagingDate.minusTwoWeeks(), pagingDate)

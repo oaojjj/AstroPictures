@@ -11,9 +11,9 @@ import javax.inject.Inject
 class PicturesRemoteDataSource @Inject constructor(
     private val retrofit: Retrofit,
 ) : PicturesDataSource {
-    override suspend fun getAstroPictures(
-        startDate: LocalDate, endDate: LocalDate
-    ): Response<List<AstroPicture>> {
+
+    override suspend fun getAstroPictures(startDate: LocalDate, endDate: LocalDate)
+            : Response<List<AstroPicture>> {
         val service = retrofit.create(NasaService::class.java)
         return service.getAstroPictures(
             startDate.toString(), endDate.toString()

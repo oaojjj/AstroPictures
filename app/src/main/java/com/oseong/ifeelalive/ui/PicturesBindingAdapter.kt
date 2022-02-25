@@ -25,7 +25,6 @@ fun bindEndScrollListener(listView: RecyclerView, loadMore: () -> Unit) {
     listView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
         override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
-            Timber.d("$dx,$dy")
             if (!recyclerView.canScrollVertically(1)) {
                 Timber.d("end recyclerView")
                 loadMore.invoke()
@@ -44,7 +43,6 @@ fun bindItems(listView: RecyclerView, items: List<AstroPictureItem>?) {
 
 @BindingAdapter("app:visible")
 fun bindVisible(view: View, boolean: Boolean) {
-    Timber.d("$boolean")
     when (boolean) {
         true -> view.visibility = View.VISIBLE
         false -> view.visibility = View.GONE

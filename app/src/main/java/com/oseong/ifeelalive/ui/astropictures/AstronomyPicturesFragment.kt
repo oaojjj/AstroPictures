@@ -60,12 +60,8 @@ class AstronomyPicturesFragment : Fragment() {
             parentFragment?.startPostponedEnterTransition()
         }
 
-        vm.error.observe(this, {
-            if (it) {
-                Toast.makeText(
-                    requireContext(), "데이터를 불러오던 중 에러가 발생했습니다.", Toast.LENGTH_SHORT
-                ).show()
-            }
+        vm.message.observe(this, {
+            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         })
     }
 

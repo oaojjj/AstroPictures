@@ -12,8 +12,7 @@ data class AstroPicture(
     val copyright: String?,
     val date: String,
     val explanation: String,
-    @SerializedName("hdurl")
-    val hdUrl: String?,
+    @SerializedName("hdurl") val hdUrl: String?,
     val media_type: String,
     val service_version: String,
     val thumbnail_url: String?,
@@ -43,5 +42,4 @@ data class AstroPicture(
     fun copyrightOrUnKnown(): String {
         return copyright ?: "UnKnown"
     }
-
 }
