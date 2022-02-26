@@ -1,6 +1,12 @@
 package com.oseong.ifeelalive
 
+import android.app.Activity
 import android.app.Application
+import android.content.Context
+import android.os.Bundle
+import android.view.View
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -8,8 +14,41 @@ import timber.log.Timber
 class App : Application() {
     override fun onCreate() {
         super.onCreate()
-
+        setupActivityLifecycleLogging()
         setupTimber()
+    }
+
+    private fun setupActivityLifecycleLogging() {
+        registerActivityLifecycleCallbacks(object : ActivityLifecycleCallbacks {
+            override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
+                Timber.d(activity.localClassName)
+            }
+
+            override fun onActivityStarted(activity: Activity) {
+                Timber.d(activity.localClassName)
+            }
+
+            override fun onActivityResumed(activity: Activity) {
+                Timber.d(activity.localClassName)
+            }
+
+            override fun onActivityPaused(activity: Activity) {
+                Timber.d(activity.localClassName)
+            }
+
+            override fun onActivityStopped(activity: Activity) {
+                Timber.d(activity.localClassName)
+            }
+
+            override fun onActivitySaveInstanceState(activity: Activity, outState: Bundle) {
+                Timber.d(activity.localClassName)
+            }
+
+            override fun onActivityDestroyed(activity: Activity) {
+                Timber.d(activity.localClassName)
+            }
+            // Logging
+        })
     }
 
     private fun setupTimber() {

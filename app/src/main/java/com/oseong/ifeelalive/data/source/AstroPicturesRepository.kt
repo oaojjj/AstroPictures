@@ -1,11 +1,12 @@
 package com.oseong.ifeelalive.data.source
 
 import com.oseong.ifeelalive.data.AstroPicture
+import dagger.hilt.android.AndroidEntryPoint
 import org.threeten.bp.LocalDate
 import retrofit2.Response
 import javax.inject.Inject
 
-class PicturesRepository @Inject constructor(
+class AstroPicturesRepository @Inject constructor(
     private val picturesRemoteDataSource: PicturesDataSource
 ) : PicturesDataSource {
 

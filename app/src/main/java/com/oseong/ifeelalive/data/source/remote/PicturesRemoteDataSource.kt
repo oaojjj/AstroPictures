@@ -19,5 +19,4 @@ class PicturesRemoteDataSource @Inject constructor(
             startDate.toString(), endDate.toString()
         )
     }
-
 }

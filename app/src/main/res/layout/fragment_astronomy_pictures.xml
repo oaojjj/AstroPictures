@@ -27,7 +27,7 @@
                 android:scrollbarAlwaysDrawVerticalTrack="true"
                 android:scrollbarThumbVertical="@color/white"
                 android:scrollbars="vertical"
-                app:endScrollListener="@{viewModel.loadMoreAstroPictures}"
+                app:endScrollListener="@{viewModel::loadMoreAstroPictures}"
                 app:items="@{viewModel.items}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

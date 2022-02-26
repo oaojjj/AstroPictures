@@ -102,7 +102,7 @@ class AstroPicturesAdapter :
         view.findNavController().navigate(
             R.id.navigate_to_detail_from_pager,
             bundleOf(
-                "item" to item,
+                "picture" to item,
                 "view" to cardView.transitionName
             ),
             null,
@@ -118,7 +118,7 @@ class AstroPicturesAdapter :
             oldItem: AstroPictureItem,
             newItem: AstroPictureItem
         ): Boolean {
-            return oldItem.item?.id == newItem.item?.id
+            return oldItem.item?.url == newItem.item?.url
         }
 
         override fun areContentsTheSame(

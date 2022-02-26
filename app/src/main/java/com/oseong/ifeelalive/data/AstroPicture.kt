@@ -8,7 +8,6 @@ import java.io.Serializable
 // GsonConverter 문제인지 모르겠는데, non-null type인데 null로 초기화되버리는 이슈가 있음..
 @Entity(tableName = "astro_pic_table")
 data class AstroPicture(
-    @PrimaryKey(autoGenerate = true) val id: Long?,
     val copyright: String?,
     val date: String,
     val explanation: String,
@@ -17,20 +16,20 @@ data class AstroPicture(
     val service_version: String,
     val thumbnail_url: String?,
     val title: String,
-    val url: String?
+    @PrimaryKey val url: String
 ) : Serializable {
 
     fun getCopyrightAndDate(): String {
         return "${copyrightOrUnKnown()} / $date"
     }
 
-    fun getThumbnail(): String? {
-        return thumbnail_url ?: url
+    fun getThumbnail(): String {
+        return thumbnail_url ?: hdUrl ?: url
     }
 
-    fun getImage(): String? {
+    fun getImage(): String {
         return if (isImage())
-            url ?: thumbnail_url ?: hdUrl
+            url
         else
             getThumbnail()
     }

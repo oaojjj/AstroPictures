@@ -32,7 +32,7 @@
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
                 android:transitionName="@string/shared_picture"
-                app:imageFromUrl="@{astroPicture.getThumbnail()}"
+                app:imageFromUrl="@{astroPicture.Image}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

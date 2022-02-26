@@ -13,7 +13,6 @@ abstract class AstroPictureDatabase : RoomDatabase() {
     companion object {
 
         private var instance: AstroPictureDatabase? = null
-
         fun getInstance(context: Context): AstroPictureDatabase {
             return instance ?: synchronized(this) {
                 Room.databaseBuilder(

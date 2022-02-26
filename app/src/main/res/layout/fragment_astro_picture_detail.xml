@@ -7,15 +7,19 @@
     <data>
 
         <variable
+            name="viewModel"
+            type="com.oseong.ifeelalive.ui.astropicturedetail.AstroPictureDetailViewModel" />
+
+        <variable
             name="item"
             type="com.oseong.ifeelalive.data.AstroPicture" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator_layout"
-        android:background="@color/grey_900"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/grey_900"
         android:fitsSystemWindows="true"
         android:transitionName="@string/shared_view">
 
@@ -95,7 +99,8 @@
             app:layout_anchorGravity="bottom|end"
             app:maxImageSize="32dp"
             app:srcCompat="@drawable/ic_favorite_24"
-            app:tint="@color/white" />
+            app:stateIcon="@{viewModel.isFavorite}"
+            app:tint="@color/white"/>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

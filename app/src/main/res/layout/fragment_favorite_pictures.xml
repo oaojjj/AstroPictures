@@ -4,11 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.favoritepictures.FavoritePicturesFragment">
 
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.oseong.ifeelalive.ui.favoritepictures.FavoritePicturesViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:layout_marginHorizontal="8dp"
             android:id="@+id/rv_favorite_pictures"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -25,7 +33,17 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:visible="@{viewModel.loading}" />
+
+        <TextView
+            app:visible="@{viewModel.isEmpty}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/favorite_astro_pic_text"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

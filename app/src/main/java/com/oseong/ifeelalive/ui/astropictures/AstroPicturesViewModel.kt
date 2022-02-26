@@ -6,7 +6,7 @@ import com.jakewharton.threetenabp.AndroidThreeTen
 import com.oseong.ifeelalive.data.AstroPicture
 import com.oseong.ifeelalive.data.AstroPictureItem
 import com.oseong.ifeelalive.data.Resource
-import com.oseong.ifeelalive.data.source.PicturesRepository
+import com.oseong.ifeelalive.data.source.AstroPicturesRepository
 import com.oseong.ifeelalive.ui.astropictures.adapter.ViewType
 import com.oseong.ifeelalive.utils.minusTwoWeeks
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,7 +19,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AstroPicturesViewModel @Inject constructor(
-    private val picturesRepository: PicturesRepository,
+    private val picturesRepository: AstroPicturesRepository,
     application: Application
 ) : AndroidViewModel(application) {
 
@@ -103,6 +103,7 @@ class AstroPicturesViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             Timber.d("picture")
             _items.postValue(Resource.Loading())
+            // TODO: try-catch 말고 network callback 이라는게 있던데, 그걸로 네트워크 상태 읽어서 판단하는게 젤 나을듯?
             try {
                 val response = picturesRepository.getAstroPictures(sd, ed)
                 if (response.isSuccessful) {

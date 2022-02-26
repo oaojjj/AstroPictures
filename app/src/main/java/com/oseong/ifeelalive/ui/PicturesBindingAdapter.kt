@@ -50,3 +50,12 @@ fun bindVisible(view: View, boolean: Boolean) {
         false -> view.visibility = View.GONE
     }
 }
+
+@BindingAdapter("app:stateIcon")
+fun bindStateIcon(view: ImageView, boolean: Boolean) {
+    Timber.d(boolean.toString())
+    when (boolean) {
+        true -> view.setImageResource(R.drawable.ic_delete_24)
+        false -> view.setImageResource(R.drawable.ic_favorite_24)
+    }
+}

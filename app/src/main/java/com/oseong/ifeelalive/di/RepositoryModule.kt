@@ -1,12 +1,13 @@
 package com.oseong.ifeelalive.di
 
 import com.oseong.ifeelalive.data.source.PicturesDataSource
-import com.oseong.ifeelalive.data.source.PicturesRepository
+import com.oseong.ifeelalive.data.source.AstroPicturesRepository
+import com.oseong.ifeelalive.data.source.FavoritesPicDataSource
+import com.oseong.ifeelalive.data.source.FavoritesPicRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineDispatcher
 import javax.inject.Singleton
 
 @Module
@@ -17,7 +18,16 @@ object RepositoryModule {
     @Provides
     fun providePicturesRepository(
         @AppModule.RemotePicturesDataSource picturesRemoteDataSource: PicturesDataSource
-    ): PicturesDataSource {
-        return PicturesRepository(picturesRemoteDataSource)
+    ): AstroPicturesRepository {
+        return AstroPicturesRepository(picturesRemoteDataSource)
     }
+
+    @Singleton
+    @Provides
+    fun provideFavoritesPicRepository(
+        @AppModule.LocalFavoritesPicDataSource favoritesPicDataSource: FavoritesPicDataSource
+    ): FavoritesPicRepository {
+        return FavoritesPicRepository(favoritesPicDataSource)
+    }
+
 }

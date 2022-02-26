@@ -8,21 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.viewModels
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.transition.MaterialContainerTransform
 import com.oseong.ifeelalive.R
 import com.oseong.ifeelalive.data.AstroPicture
 import com.oseong.ifeelalive.databinding.FragmentAstroPictureDetailBinding
 import com.oseong.ifeelalive.utils.setStatusBarColor
-import timber.log.Timber
+import dagger.hilt.android.AndroidEntryPoint
 import kotlin.math.abs
 
+@AndroidEntryPoint
 class AstroPictureDetailFragment : Fragment() {
 
     private var _binding: FragmentAstroPictureDetailBinding? = null
     private val binding get() = _binding!!
 
-    private val astroPicture: AstroPicture by lazy { arguments?.getSerializable("item") as AstroPicture }
+    private val astroPicture: AstroPicture by lazy { arguments?.getSerializable("picture") as AstroPicture }
+    private val vm: AstroPictureDetailViewModel by viewModels()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -38,7 +41,7 @@ class AstroPictureDetailFragment : Fragment() {
 
     private fun initTransitionElement() {
         sharedElementEnterTransition = MaterialContainerTransform().apply {
-            duration = 850
+            duration = 650
             drawingViewId = R.id.nav_host
             //containerColor = MaterialColors.getColor(requireActivity().findViewById(android.R.id.content), R.attr.colorSurface)
             fadeMode = MaterialContainerTransform.FADE_MODE_IN
@@ -69,10 +72,11 @@ class AstroPictureDetailFragment : Fragment() {
             false
         )
         return with(binding) {
-            this.item = astroPicture
+            item = astroPicture
+            viewModel = vm
 
             fab.setOnClickListener {
-                Timber.d("click-fab")
+                vm.clickFavorite()
             }
 
             appbar.addOnOffsetChangedListener(AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
