@@ -13,9 +13,6 @@ class FavoritePicturesViewModel @Inject constructor(
     val items: LiveData<List<AstroPicture>?> =
         favoritesRepository.getFavoritePictures().asLiveData()
 
-    private val _loading: MutableLiveData<Boolean> = MutableLiveData(false)
-    val loading: LiveData<Boolean> = _loading
-
     val isEmpty: LiveData<Boolean> = items.map {
         it.isNullOrEmpty()
     }
