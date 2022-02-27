@@ -19,8 +19,8 @@
         android:layout_marginTop="12dp"
         android:layout_marginBottom="8dp"
         android:clickable="true"
+        android:focusable="true"
         android:foreground="?android:attr/selectableItemBackground"
-        android:transitionName="@string/shared_view"
         app:cardElevation="16dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -28,13 +28,12 @@
             android:layout_height="240dp"
             android:background="@drawable/scrim">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_thumbs"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="fitXY"
-                android:transitionName="@string/shared_picture"
-                app:imageFromUrl="@{astroPicture.thumbnail}" />
+                app:imageFromUrl="@{astroPicture.image}" />
 
             <TextView
                 android:id="@+id/tv_title"

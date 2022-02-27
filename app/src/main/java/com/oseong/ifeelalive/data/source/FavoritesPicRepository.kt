@@ -13,7 +13,6 @@ class FavoritesPicRepository @Inject constructor(
     }
 
     override fun isFavorite(pictureUrl: String): Flow<Boolean> {
-        Timber.d(pictureUrl)
         return localFavoritesPicDataSource.isFavorite(pictureUrl)
     }
 

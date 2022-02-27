@@ -53,19 +53,12 @@ class AstronomyPicturesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        enterTransition = Hold()
-
-        parentFragment?.postponeEnterTransition()
-        view.doOnPreDraw {
-            parentFragment?.startPostponedEnterTransition()
-        }
 
         vm.message.observe(this, {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         })
 
         binding.swipeRefreshLayout.setOnRefreshListener {
-            Timber.d("refresh")
             vm.refreshPictures()
             binding.swipeRefreshLayout.isRefreshing = false
         }

@@ -10,6 +10,7 @@ import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.transition.MaterialArcMotion
 import com.google.android.material.transition.MaterialContainerTransform
 import com.oseong.ifeelalive.R
 import com.oseong.ifeelalive.data.AstroPicture
@@ -42,11 +43,11 @@ class AstroPictureDetailFragment : Fragment() {
 
     private fun initTransitionElement() {
         sharedElementEnterTransition = MaterialContainerTransform().apply {
-            duration = 650
-            drawingViewId = R.id.nav_host
-            //containerColor = MaterialColors.getColor(requireActivity().findViewById(android.R.id.content), R.attr.colorSurface)
+            duration = 450
+            setPathMotion(MaterialArcMotion())
             fadeMode = MaterialContainerTransform.FADE_MODE_IN
-            isElevationShadowEnabled = true
+            isElevationShadowEnabled = false
+            endElevation = 8f
         }
 
         /*with(sharedElementEnterTransition as MaterialContainerTransform) {
@@ -103,10 +104,6 @@ class AstroPictureDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initTransitionName()
-
-        vm.isFavorite.observe(viewLifecycleOwner, {
-            Timber.d(it.toString())
-        })
     }
 
     private fun initTransitionName() {

@@ -22,11 +22,9 @@ class AstroPictureDetailViewModel @Inject constructor(
         picture?.let {
             when (isFavorite.value) {
                 true -> {
-                    Timber.d("true")
                     favoritesRepository.unFavorite(picture)
                 }
                 false -> {
-                    Timber.d("false")
                     favoritesRepository.favorite(picture)
                 }
             }

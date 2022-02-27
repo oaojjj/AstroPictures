@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.doOnPreDraw
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.google.android.material.transition.Hold
 import com.oseong.ifeelalive.R
 import com.oseong.ifeelalive.databinding.FragmentHomeViewPagerBinding
 import com.oseong.ifeelalive.ui.main.adapter.ASTRO_PICTURES_INDEX
@@ -46,6 +48,12 @@ class HomeViewPagerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         with(requireActivity()) {
             setStatusBarColor(resources.getColor(R.color.black))
+        }
+        enterTransition = Hold()
+
+        postponeEnterTransition()
+        view.doOnPreDraw {
+            startPostponedEnterTransition()
         }
     }
 
