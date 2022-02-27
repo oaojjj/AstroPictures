@@ -16,6 +16,7 @@ import com.oseong.ifeelalive.data.AstroPicture
 import com.oseong.ifeelalive.databinding.FragmentAstroPictureDetailBinding
 import com.oseong.ifeelalive.utils.setStatusBarColor
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import kotlin.math.abs
 
 @AndroidEntryPoint
@@ -74,6 +75,7 @@ class AstroPictureDetailFragment : Fragment() {
         return with(binding) {
             item = astroPicture
             viewModel = vm
+            this.lifecycleOwner = viewLifecycleOwner
 
             fab.setOnClickListener {
                 vm.clickFavorite()
@@ -101,6 +103,10 @@ class AstroPictureDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initTransitionName()
+
+        vm.isFavorite.observe(viewLifecycleOwner, {
+            Timber.d(it.toString())
+        })
     }
 
     private fun initTransitionName() {

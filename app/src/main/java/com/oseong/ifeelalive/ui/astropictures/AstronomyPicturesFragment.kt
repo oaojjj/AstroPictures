@@ -41,7 +41,7 @@ class AstronomyPicturesFragment : Fragment() {
 
         return with(binding) {
             this.viewModel = vm
-            lifecycleOwner = this@AstronomyPicturesFragment
+            lifecycleOwner = viewLifecycleOwner
 
             rvAstroPictures.run {
                 this.adapter = astroAdapter

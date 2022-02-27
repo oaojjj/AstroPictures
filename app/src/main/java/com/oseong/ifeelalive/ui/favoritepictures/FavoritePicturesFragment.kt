@@ -35,7 +35,7 @@ class FavoritePicturesFragment : Fragment() {
 
         return with(binding) {
             viewModel = vm
-            lifecycleOwner = this@FavoritePicturesFragment
+            lifecycleOwner = viewLifecycleOwner
 
             with(rvFavoritePictures) {
                 adapter = listAdapter

@@ -18,4 +18,5 @@ interface AstroPictureDao {
 
     @Query("SELECT EXISTS(SELECT 1 FROM astro_pic_table WHERE url = :pictureUrl LIMIT 1)")
     fun isFavorite(pictureUrl: String): Flow<Boolean>
+
 }

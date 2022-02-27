@@ -20,7 +20,6 @@ class AstroPictureDetailViewModel @Inject constructor(
 
     fun clickFavorite() = viewModelScope.launch(Dispatchers.IO) {
         picture?.let {
-            favoritesRepository.favorite(picture)
             when (isFavorite.value) {
                 true -> {
                     Timber.d("true")
@@ -28,6 +27,7 @@ class AstroPictureDetailViewModel @Inject constructor(
                 }
                 false -> {
                     Timber.d("false")
+                    favoritesRepository.favorite(picture)
                 }
             }
         }

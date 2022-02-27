@@ -21,4 +21,5 @@ class FavoritesPicLocalDataSource @Inject constructor(
     override suspend fun unFavorite(astroPicture: AstroPicture) {
         dao.deleteFavoritePicture(astroPicture)
     }
+
 }

@@ -5,6 +5,7 @@ import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.oseong.ifeelalive.R
 import com.oseong.ifeelalive.data.AstroPictureItem
 import com.oseong.ifeelalive.ui.astropictures.adapter.AstroPicturesAdapter
@@ -49,11 +50,12 @@ fun bindVisible(view: View, boolean: Boolean) {
     }
 }
 
-@BindingAdapter("app:stateIcon")
-fun bindStateIcon(view: ImageView, boolean: Boolean) {
-    Timber.d("isFavorite:${boolean}")
-    when (boolean) {
-        true -> view.setImageResource(R.drawable.ic_delete_24)
-        false -> view.setImageResource(R.drawable.ic_favorite_24)
+@BindingAdapter("app:iconChange")
+fun bindIconChange(view: FloatingActionButton, isFavorite: Boolean?) {
+    Timber.d("isFavorite:${isFavorite}")
+    if (isFavorite == null || !isFavorite)
+        view.setImageResource(R.drawable.ic_favorite_24)
+    else {
+        view.setImageResource(R.drawable.ic_delete_24)
     }
 }
