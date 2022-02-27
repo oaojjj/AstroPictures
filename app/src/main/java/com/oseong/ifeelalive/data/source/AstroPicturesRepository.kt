@@ -1,8 +1,8 @@
 package com.oseong.ifeelalive.data.source
 
 import com.oseong.ifeelalive.data.AstroPicture
-import dagger.hilt.android.AndroidEntryPoint
-import org.threeten.bp.LocalDate
+
+import org.threeten.bp.LocalDateTime
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -11,6 +11,6 @@ class AstroPicturesRepository @Inject constructor(
 ) : PicturesDataSource {
 
     override suspend fun getAstroPictures(
-        startDate: LocalDate, endDate: LocalDate
+        startDate: LocalDateTime, endDate: LocalDateTime
     ): Response<List<AstroPicture>> = picturesRemoteDataSource.getAstroPictures(startDate, endDate)
 }

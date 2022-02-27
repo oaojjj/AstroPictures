@@ -1,5 +1,5 @@
 package com.oseong.ifeelalive.utils
 
-import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
 
-fun LocalDate.minusTwoWeeks(): LocalDate = this.minusWeeks(2)
+fun LocalDateTime.minusTwoWeeks(): LocalDateTime = this.minusWeeks(2)

@@ -29,7 +29,7 @@ data class AstroPicture(
 
     fun getImage(): String {
         return if (isImage())
-            url
+            thumbnail_url ?: url
         else
             getThumbnail()
     }

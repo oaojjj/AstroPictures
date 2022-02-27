@@ -2,9 +2,7 @@ package com.oseong.ifeelalive.ui
 
 import android.view.View
 import android.widget.ImageView
-import androidx.core.view.isNotEmpty
 import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.oseong.ifeelalive.R
@@ -53,7 +51,7 @@ fun bindVisible(view: View, boolean: Boolean) {
 
 @BindingAdapter("app:stateIcon")
 fun bindStateIcon(view: ImageView, boolean: Boolean) {
-    Timber.d(boolean.toString())
+    Timber.d("isFavorite:${boolean}")
     when (boolean) {
         true -> view.setImageResource(R.drawable.ic_delete_24)
         false -> view.setImageResource(R.drawable.ic_favorite_24)

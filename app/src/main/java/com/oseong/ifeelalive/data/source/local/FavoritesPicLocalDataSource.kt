@@ -1,6 +1,5 @@
 package com.oseong.ifeelalive.data.source.local
 
-import androidx.lifecycle.LiveData
 import com.oseong.ifeelalive.data.AstroPicture
 import com.oseong.ifeelalive.data.source.FavoritesPicDataSource
 import kotlinx.coroutines.flow.Flow

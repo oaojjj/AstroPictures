@@ -16,12 +16,11 @@ class AstroPictureDetailViewModel @Inject constructor(
 ) : ViewModel() {
     private val picture = savedStateHandle.get<AstroPicture>(PICTURE_SAVED_STATE_KEY)
 
-    // .asLiveData()는 collect()하고 emit()으로 liveData로 돌려주는 확장함수
-    val isFavorite: LiveData<Boolean> =
-        favoritesRepository.isFavorite(picture!!.url).asLiveData()
+    val isFavorite: LiveData<Boolean> = favoritesRepository.isFavorite(picture!!.url).asLiveData()
 
     fun clickFavorite() = viewModelScope.launch(Dispatchers.IO) {
         picture?.let {
+            favoritesRepository.favorite(picture)
             when (isFavorite.value) {
                 true -> {
                     Timber.d("true")
@@ -29,7 +28,6 @@ class AstroPictureDetailViewModel @Inject constructor(
                 }
                 false -> {
                     Timber.d("false")
-                    favoritesRepository.favorite(picture)
                 }
             }
         }

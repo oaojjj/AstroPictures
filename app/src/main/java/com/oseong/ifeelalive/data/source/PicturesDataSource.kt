@@ -1,7 +1,7 @@
 package com.oseong.ifeelalive.data.source
 
 import com.oseong.ifeelalive.data.AstroPicture
-import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
 import retrofit2.Response
 
 interface PicturesDataSource {
@@ -10,5 +10,5 @@ interface PicturesDataSource {
      * @param endDate endDate
      * ex) startDate ~ endDate -> 2020-02-02 ~ 2020-02-09
      */
-    suspend fun getAstroPictures(startDate: LocalDate, endDate: LocalDate): Response<List<AstroPicture>>
+    suspend fun getAstroPictures(startDate: LocalDateTime, endDate: LocalDateTime): Response<List<AstroPicture>>
 }

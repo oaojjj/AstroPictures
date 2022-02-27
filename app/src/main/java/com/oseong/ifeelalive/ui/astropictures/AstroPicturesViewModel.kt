@@ -12,7 +12,7 @@ import com.oseong.ifeelalive.utils.minusTwoWeeks
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import org.threeten.bp.LocalDate
+import org.threeten.bp.LocalDateTime
 import timber.log.Timber
 import java.net.UnknownHostException
 import javax.inject.Inject
@@ -43,11 +43,11 @@ class AstroPicturesViewModel @Inject constructor(
     }
 
     // 날짜 선택 기능 추가 생각해보기.
-    private var pagingDate: LocalDate
+    private var pagingDate: LocalDateTime
 
     init {
         AndroidThreeTen.init(application)
-        pagingDate = LocalDate.now()
+        pagingDate = LocalDateTime.now().minusHours(1)
         loadAstroPictures(pagingDate.minusTwoWeeks(), pagingDate)
     }
 
@@ -99,7 +99,7 @@ class AstroPicturesViewModel @Inject constructor(
      * @param ed endDate
      * ex) sd ~ ed -> 2020-02-02 ~ 2020-02-09
      */
-    fun loadAstroPictures(sd: LocalDate, ed: LocalDate) =
+    fun loadAstroPictures(sd: LocalDateTime, ed: LocalDateTime) =
         viewModelScope.launch(Dispatchers.IO) {
             Timber.d("picture")
             _items.postValue(Resource.Loading())
@@ -123,15 +123,17 @@ class AstroPicturesViewModel @Inject constructor(
         }
 
     fun loadMoreAstroPictures() {
-        Timber.d("loadMore")
-        loadAstroPictures(pagingDate.minusTwoWeeks(), pagingDate)
+        if (_items.value !is Resource.Loading) {
+            Timber.d("loadMore")
+            loadAstroPictures(pagingDate.minusTwoWeeks(), pagingDate)
+        }
     }
 
     fun refreshPictures() {
         Timber.d("refresh")
         _firstLoad.value = true
         _loading.value = true
-        pagingDate = LocalDate.now()
+        pagingDate = LocalDateTime.now()
         loadAstroPictures(pagingDate.minusTwoWeeks(), pagingDate)
     }
 }
