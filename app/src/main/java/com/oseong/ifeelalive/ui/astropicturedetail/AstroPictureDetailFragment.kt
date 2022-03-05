@@ -43,8 +43,9 @@ class AstroPictureDetailFragment : Fragment() {
 
     private fun initTransitionElement() {
         sharedElementEnterTransition = MaterialContainerTransform().apply {
-            duration =  650
-            excludeTarget(R.id.toolbar_title,true)
+            duration = 650
+            drawingViewId = R.id.nav_host
+            excludeTarget(R.id.toolbar_title, true)
             setPathMotion(MaterialArcMotion())
             fadeMode = MaterialContainerTransform.FADE_MODE_OUT
             isElevationShadowEnabled = false
