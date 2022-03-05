@@ -10,6 +10,7 @@ import androidx.core.view.doOnPreDraw
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.google.android.material.transition.Hold
 import com.oseong.ifeelalive.R
 import com.oseong.ifeelalive.ui.astropictures.adapter.AstroPicturesAdapter
@@ -53,7 +54,6 @@ class AstronomyPicturesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         vm.message.observe(this, {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
         })

@@ -23,7 +23,7 @@ data class AstroPicture(
         return "${copyrightOrUnKnown()} / $date"
     }
 
-    fun getThumbnail(): String {
+    private fun getThumbnail(): String {
         return thumbnail_url ?: hdUrl ?: url
     }
 

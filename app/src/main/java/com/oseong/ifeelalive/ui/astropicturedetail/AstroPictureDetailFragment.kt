@@ -17,7 +17,6 @@ import com.oseong.ifeelalive.data.AstroPicture
 import com.oseong.ifeelalive.databinding.FragmentAstroPictureDetailBinding
 import com.oseong.ifeelalive.utils.setStatusBarColor
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import kotlin.math.abs
 
 @AndroidEntryPoint

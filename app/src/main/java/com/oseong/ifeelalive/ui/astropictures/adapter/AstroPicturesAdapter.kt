@@ -26,13 +26,14 @@ class AstroPicturesAdapter :
     ListAdapter<AstroPictureItem, RecyclerView.ViewHolder>(AstroPictureDiffCallback) {
 
     // today astronomy picture
-    inner class HeaderViewHolder(private val binding: ItemHeaderPictureBinding) :
+    inner class HeaderViewHolder(val binding: ItemHeaderPictureBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AstroPicture) {
             with(binding.root.context) {
-                val viewName = getString(R.string.shared_view).plus(bindingAdapterPosition)
+                val viewName = getString(R.string.shared_view).plus(item.date)
                 ViewCompat.setTransitionName(binding.cardContainer, viewName)
             }
+
             binding.astroPicture = item
             binding.executePendingBindings()
         }
@@ -43,7 +44,7 @@ class AstroPicturesAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AstroPicture) {
             with(binding.root.context) {
-                val viewName = getString(R.string.shared_view).plus(bindingAdapterPosition)
+                val viewName = getString(R.string.shared_view).plus(item.date)
                 ViewCompat.setTransitionName(binding.cardContainer, viewName)
                 /*
                 val imageName = getString(R.string.shared_picture).plus(layoutPosition)
