@@ -43,13 +43,12 @@ class AstroPictureDetailFragment : Fragment() {
 
     private fun initTransitionElement() {
         sharedElementEnterTransition = MaterialContainerTransform().apply {
-            duration = 450
+            duration =  650
+            excludeTarget(R.id.toolbar_title,true)
             setPathMotion(MaterialArcMotion())
-            fadeMode = MaterialContainerTransform.FADE_MODE_IN
+            fadeMode = MaterialContainerTransform.FADE_MODE_OUT
             isElevationShadowEnabled = false
-            endElevation = 8f
         }
-
         /*with(sharedElementEnterTransition as MaterialContainerTransform) {
             addListener(object : TransitionListenerAdapter() {
                 override fun onTransitionEnd(transition: Transition) {

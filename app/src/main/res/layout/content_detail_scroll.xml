@@ -25,7 +25,8 @@
                 android:elevation="16dp"
                 android:padding="16dp"
                 android:text="@{item.explanation}"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:textIsSelectable="true" />
 
             <TextView
                 android:layout_width="wrap_content"

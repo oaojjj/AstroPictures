@@ -30,7 +30,7 @@ class AstroPicturesAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AstroPicture) {
             with(binding.root.context) {
-                val viewName = getString(R.string.shared_view).plus(layoutPosition)
+                val viewName = getString(R.string.shared_view).plus(bindingAdapterPosition)
                 ViewCompat.setTransitionName(binding.cardContainer, viewName)
             }
             binding.astroPicture = item
@@ -43,7 +43,7 @@ class AstroPicturesAdapter :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: AstroPicture) {
             with(binding.root.context) {
-                val viewName = getString(R.string.shared_view).plus(layoutPosition)
+                val viewName = getString(R.string.shared_view).plus(bindingAdapterPosition)
                 ViewCompat.setTransitionName(binding.cardContainer, viewName)
                 /*
                 val imageName = getString(R.string.shared_picture).plus(layoutPosition)
