@@ -6,7 +6,7 @@
 
         <variable
             name="item"
-            type="com.oseong.ifeelalive.data.AstroPicture" />
+            type="com.oseong.astropictures.data.AstroPicture" />
     </data>
 
     <com.google.android.material.card.MaterialCardView

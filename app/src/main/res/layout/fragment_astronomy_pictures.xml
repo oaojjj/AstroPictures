@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oseong.ifeelalive.ui.astropictures.AstroPicturesViewModel" />
+            type="com.oseong.astropictures.ui.astropictures.AstroPicturesViewModel" />
     </data>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

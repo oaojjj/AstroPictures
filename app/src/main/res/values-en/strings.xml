@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">IFeelAlive</string>
+    <string name="app_name">AstronomyPictures</string>
     <string name="astronomy_pictures" translatable="false">AstronomyPictures</string>
     <string name="astro_pictures">Astro Pictures</string>
     <string name="favorite_astro_pictures">Favorite Picture</string>

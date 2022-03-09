@@ -8,7 +8,7 @@
 
         <variable
             name="viewModel"
-            type="com.oseong.ifeelalive.ui.favoritepictures.FavoritePicturesViewModel" />
+            type="com.oseong.astropictures.ui.favoritepictures.FavoritePicturesViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

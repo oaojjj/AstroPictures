@@ -6,7 +6,7 @@
 
         <variable
             name="astroPicture"
-            type="com.oseong.ifeelalive.data.AstroPicture" />
+            type="com.oseong.astropictures.data.AstroPicture" />
 
     </data>
 

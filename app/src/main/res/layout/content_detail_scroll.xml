@@ -5,7 +5,7 @@
 
         <variable
             name="item"
-            type="com.oseong.ifeelalive.data.AstroPicture" />
+            type="com.oseong.astropictures.data.AstroPicture" />
     </data>
 
     <androidx.core.widget.NestedScrollView

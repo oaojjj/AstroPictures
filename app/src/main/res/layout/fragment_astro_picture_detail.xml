@@ -8,11 +8,11 @@
 
         <variable
             name="viewModel"
-            type="com.oseong.ifeelalive.ui.astropicturedetail.AstroPictureDetailViewModel" />
+            type="com.oseong.astropictures.ui.astropicturedetail.AstroPictureDetailViewModel" />
 
         <variable
             name="item"
-            type="com.oseong.ifeelalive.data.AstroPicture" />
+            type="com.oseong.astropictures.data.AstroPicture" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout

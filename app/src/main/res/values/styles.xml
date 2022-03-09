@@ -11,10 +11,10 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-    <style name="Theme.IFeelAlive.Splash" parent="Theme.SplashScreen">
+    <style name="Theme.AstroPictures.Splash" parent="Theme.SplashScreen">
         <item name="windowSplashScreenBackground">@color/grey_900</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splash_logo</item>
-        <item name="postSplashScreenTheme">@style/Theme.IFeelAlive</item>
+        <item name="postSplashScreenTheme">@style/Theme.AstroPictures</item>
 
     </style>
 
