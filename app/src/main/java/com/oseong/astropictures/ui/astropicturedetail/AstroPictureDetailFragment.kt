@@ -11,8 +11,8 @@ import androidx.core.view.ViewCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.transition.MaterialArcMotion
-import com.google.android.material.transition.MaterialContainerTransform
+import com.google.android.material.transition.platform.MaterialArcMotion
+import com.google.android.material.transition.platform.MaterialContainerTransform
 import com.oseong.astropictures.R
 import com.oseong.astropictures.data.AstroPicture
 import com.oseong.astropictures.databinding.FragmentAstroPictureDetailBinding

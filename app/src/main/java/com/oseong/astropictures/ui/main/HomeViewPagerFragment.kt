@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.doOnPreDraw
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.android.material.transition.MaterialElevationScale
+import com.google.android.material.transition.platform.MaterialElevationScale
 import com.oseong.astropictures.R
 import com.oseong.astropictures.databinding.FragmentHomeViewPagerBinding
 import com.oseong.astropictures.ui.main.adapter.ASTRO_PICTURES_INDEX

@@ -13,25 +13,26 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:transitionGroup="true">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginHorizontal="8dp"
             android:id="@+id/rv_favorite_pictures"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginHorizontal="8dp"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:scrollbarThumbVertical="@color/white"
             android:scrollbars="vertical" />
 
         <TextView
-            app:visible="@{viewModel.isEmpty}"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
             android:text="@string/favorite_astro_pic_text"
             android:textColor="@color/white"
-            android:textSize="18sp" />
+            android:textSize="18sp"
+            app:visible="@{viewModel.isEmpty}" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
