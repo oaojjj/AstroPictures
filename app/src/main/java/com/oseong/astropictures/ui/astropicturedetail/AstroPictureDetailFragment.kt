@@ -1,6 +1,7 @@
 package com.oseong.astropictures.ui.astropicturedetail
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -33,33 +34,6 @@ class AstroPictureDetailFragment : Fragment() {
         with(requireActivity()) {
             setStatusBarColor(resources.getColor(android.R.color.transparent))
         }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initTransitionElement()
-    }
-
-    private fun initTransitionElement() {
-        sharedElementEnterTransition = MaterialContainerTransform().apply {
-            duration = 650
-            drawingViewId = R.id.nav_host
-            excludeTarget(R.id.toolbar_title, true)
-            setPathMotion(MaterialArcMotion())
-            fadeMode = MaterialContainerTransform.FADE_MODE_OUT
-            isElevationShadowEnabled = false
-        }
-        /*with(sharedElementEnterTransition as MaterialContainerTransform) {
-            addListener(object : TransitionListenerAdapter() {
-                override fun onTransitionEnd(transition: Transition) {
-                    removeListener(this)
-                    if (isHoldAtEndEnabled) {
-                        return
-                    }
-                    super.onTransitionEnd(transition)
-                }
-            })
-        }*/
     }
 
     override fun onCreateView(
@@ -103,6 +77,7 @@ class AstroPictureDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initTransitionName()
+        initTransitionElement()
     }
 
     private fun initTransitionName() {
@@ -115,6 +90,29 @@ class AstroPictureDetailFragment : Fragment() {
             ViewCompat.setTransitionName(binding.ivImage, it)
         }
         */
+    }
+
+    private fun initTransitionElement() {
+        sharedElementEnterTransition = MaterialContainerTransform().apply {
+            duration = 650L
+            drawingViewId = R.id.nav_host
+            fadeMode = MaterialContainerTransform.FADE_MODE_OUT
+            setPathMotion(MaterialArcMotion())
+            setAllContainerColors(Color.TRANSPARENT)
+            scrimColor = resources.getColor(R.color.grey_800, null)
+            isElevationShadowEnabled = false
+        }
+        /*with(sharedElementEnterTransition as MaterialContainerTransform) {
+            addListener(object : TransitionListenerAdapter() {
+                override fun onTransitionEnd(transition: Transition) {
+                    removeListener(this)
+                    if (isHoldAtEndEnabled) {
+                        return
+                    }
+                    super.onTransitionEnd(transition)
+                }
+            })
+        }*/
     }
 
     override fun onDestroyView() {

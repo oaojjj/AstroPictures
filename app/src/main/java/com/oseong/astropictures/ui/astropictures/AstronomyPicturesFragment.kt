@@ -10,8 +10,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.oseong.astropictures.R
-import com.oseong.astropictures.ui.astropictures.adapter.AstroPicturesAdapter
 import com.oseong.astropictures.databinding.FragmentAstronomyPicturesBinding
+import com.oseong.astropictures.ui.astropictures.adapter.AstroPicturesAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import timber.log.Timber
 
@@ -22,10 +22,6 @@ class AstronomyPicturesFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val vm: AstroPicturesViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

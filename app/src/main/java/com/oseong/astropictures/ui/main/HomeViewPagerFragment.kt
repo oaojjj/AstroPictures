@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.doOnPreDraw
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.google.android.material.transition.Hold
+import com.google.android.material.transition.MaterialElevationScale
 import com.oseong.astropictures.R
 import com.oseong.astropictures.databinding.FragmentHomeViewPagerBinding
 import com.oseong.astropictures.ui.main.adapter.ASTRO_PICTURES_INDEX
@@ -20,9 +20,6 @@ import timber.log.Timber
 
 class HomeViewPagerFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,7 +46,9 @@ class HomeViewPagerFragment : Fragment() {
         with(requireActivity()) {
             setStatusBarColor(resources.getColor(R.color.black))
         }
-        enterTransition = Hold()
+
+        exitTransition = MaterialElevationScale(/* growing= */ false)
+        reenterTransition = MaterialElevationScale(/* growing= */ true)
 
         postponeEnterTransition()
         view.doOnPreDraw {

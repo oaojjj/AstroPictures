@@ -30,7 +30,7 @@
                 android:id="@+id/iv_thumbs"
                 android:layout_width="match_parent"
                 android:layout_height="160dp"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 app:imageFromUrl="@{item.image}" />
 
             <TextView
